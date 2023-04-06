@@ -45,4 +45,8 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function Subject(){
+        return $this->belongsToMany(Subject::class,'user_subjects','subject_id','user_id');
+    }
 }
