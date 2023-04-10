@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserController;
@@ -30,9 +31,13 @@ Route::prefix('/users')->group(function () {
 
 // });
 
-Route::get('/users', [UserController::class, 'getListUsers'])->name('listUsers');
-Route::get('/user/{id}', [UserController::class, 'getUserById']);
-
 
 Route::get('login', [LoginController::class, 'showloginErr'])->name('login');
-Route::post('custom-login', [LoginController::class, 'login'])->name('login.custom'); 
+Route::post('login-custom', [LoginController::class, 'login'])->name('login.custom'); 
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('home',[HomeController::class, 'index'])->name('home');   
+    Route::get('users', [UserController::class, 'getListUsers'])->name('listUsers');
+    Route::get('user', [UserController::class, 'getUserById'])->name('getUserById');
+ 
+});

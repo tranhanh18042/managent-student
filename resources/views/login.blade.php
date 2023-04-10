@@ -11,7 +11,7 @@
     <title>Hello, world!</title>
   </head>
   <body>
-
+    @include('alert')
     <form method="POST" action="{{ route('login.custom') }}">
       @csrf
       <div class="form-group">
@@ -27,7 +27,7 @@
         <input type="checkbox" class="form-check-input" id="exampleCheck1">
         <label class="form-check-label" for="exampleCheck1">Check me out</label>
       </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
+      <button type="submit" class="btn btn-primary">Login</button>
     </form>
 
     <!-- Optional JavaScript; choose one of the two! -->

@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 
 class LoginController extends Controller
 {
@@ -14,12 +15,20 @@ class LoginController extends Controller
     }
     public function login(Request $request){
 
-        $user = User::whereEmail($request->email)->wherePassword(md5($request->password))->first();
-        if ($user != null) {
-            return redirect()->route('listUsers');
+        $this->validate($request,[
+            'email' => 'required|email::filter',
+            'password' => 'required'
+        ]);
+        $user = User::whereEmail($request->email)->first();
+        $checkPass = Hash::check($request->password, $user->password);
+        // dd($checkPass);
+        if ($user != null && $checkPass == true) {
+            Auth::login($user);
+            // dd(Auth::user());
+            return redirect()->route('home');
         }
-        else {
-            return redirect()->back();
-        }
+        
+        Session::flash('error','Sai mat khau hoac tai khoan');
+        return redirect()->back();
     }
 }
