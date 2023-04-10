@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\UpdateUser;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -11,14 +10,16 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
     public function getListUsers(){
-        return UserResource::collection(User::all());
+        $users = UserResource::collection(User::all());
+        return view('listUsers', ['users' => $users]);
     }
     public function getUserByID(int $id){
-        return new UserResource(User::findOrFail($id));
+        $userRes = User::findOrFail($id);  
+        return view('profileUser', compact('userRes'));
     }
     public function updateUserByID(Request $request, int $id){
         $userRes = User::where('id', $id)->update($request->all());
-        return $userRes;
+        return view('user',['userRes' => $userRes]);
     }
     public function createUser(Request $request){
         $user = User::create([
@@ -32,5 +33,6 @@ class UserController extends Controller
 
         ]);
         return $user;
+        
     }
 }
