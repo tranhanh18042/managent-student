@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -24,16 +25,15 @@ class UserController extends Controller
         return view('updateProfile', compact('user'));
     }
 
-    public function updateUser(Request $request){
+    public function updateUser(UserRequest $request){
         $user = Auth::user();
-        $input =[
-            'name' => $request->name,
-            'address' => $request->address,
-            'email' => $request->email,
-            'phone' => $request->phone,
-            'avatar' => $request->avatar,
-
-        ];
+        $input = $request->validate([
+            'name',
+            'address',
+            'email',
+            'phone',
+        ]);
+        dd($input);
         DB::table('users')
             ->where('email', $user->email)->limit(1)->update($input);  
         return redirect()->route('profile');
