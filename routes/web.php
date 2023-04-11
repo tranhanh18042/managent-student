@@ -3,6 +3,8 @@
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\LogoutController;
+use App\Http\Controllers\UpdateProfile;
 use App\Http\Controllers\UserController;
 
 /*
@@ -32,12 +34,16 @@ Route::prefix('/users')->group(function () {
 // });
 
 
-Route::get('login', [LoginController::class, 'showloginErr'])->name('login');
-Route::post('login-custom', [LoginController::class, 'login'])->name('login.custom'); 
+Route::get('/login', [LoginController::class, 'showloginErr'])->name('login');
+Route::post('/login-custom', [LoginController::class, 'login'])->name('login.custom'); 
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('home',[HomeController::class, 'index'])->name('home');   
-    Route::get('users', [UserController::class, 'getListUsers'])->name('listUsers');
-    Route::get('user', [UserController::class, 'getUserById'])->name('getUserById');
- 
+    Route::get('/home',[HomeController::class, 'index'])->name('home');   
+    Route::get('/users', [UserController::class, 'getListUsers'])->name('listUsers');
+    Route::get('/user', [UserController::class, 'getUserById'])->name('profile');
+    Route::get('/logout', [LogoutController::class, 'logout']);
+    Route::get('/update-profile', [UserController::class,'edit'])->name('editProfile');
+    Route::patch('/update-profile', [UserController::class,'updateUser'])->name('submitProfile');
+
 });
+

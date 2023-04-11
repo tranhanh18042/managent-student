@@ -6,6 +6,7 @@ use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -18,9 +19,24 @@ class UserController extends Controller
         $userRes = Auth::user();
         return view('profileUser', compact('userRes'));
     }
-    public function updateUserByID(Request $request, int $id){
-        $userRes = User::where('id', $id)->update($request->all());
-        return view('user',['userRes' => $userRes]);
+    public function edit(){
+        $user =Auth::user();
+        return view('updateProfile', compact('user'));
+    }
+
+    public function updateUser(Request $request){
+        $user = Auth::user();
+        $input =[
+            'name' => $request->name,
+            'address' => $request->address,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'avatar' => $request->avatar,
+
+        ];
+        DB::table('users')
+            ->where('email', $user->email)->limit(1)->update($input);  
+        return redirect()->route('profile');
     }
     public function createUser(Request $request){
         $user = User::create([
