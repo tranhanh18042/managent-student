@@ -80,9 +80,9 @@
                     <hr>
                 </div>
                 <!-- Form START -->
-                <form class="file-upload" action="" method="POST">
+                <form class="file-upload" action="{{route('submitProfile')}}" method="POST">
                   @csrf
-                  @method("PATCH")
+                  @method("POST")
                   <div class="row mb-5 gx-5">
                         <!-- Contact detail -->
                         <div class="col-xxl-8 mb-5 mb-xxl-0">

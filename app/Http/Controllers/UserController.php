@@ -21,21 +21,16 @@ class UserController extends Controller
         return view('profileUser', compact('userRes'));
     }
     public function edit(){
-        $user =Auth::user();
+        $user = Auth::user();
         return view('updateProfile', compact('user'));
     }
 
     public function updateUser(UserRequest $request){
         $user = Auth::user();
-        $input = $request->validate([
-            'name',
-            'address',
-            'email',
-            'phone',
-        ]);
-        dd($input);
+        $input = $request->safe()->only(['name', 'email','phone', 'address']);
         DB::table('users')
-            ->where('email', $user->email)->limit(1)->update($input);  
+            ->where('email', $user->email)
+            ->update($input);  
         return redirect()->route('profile');
     }
     public function createUser(Request $request){

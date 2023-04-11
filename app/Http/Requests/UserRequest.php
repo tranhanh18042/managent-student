@@ -25,8 +25,8 @@ class UserRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'email' => 'required',
-            'password' => 'required',
+            'email' => 'required|email:rfc,dns',
+            'phone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
             'address' => 'required',
         ];
     }
