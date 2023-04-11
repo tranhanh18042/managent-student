@@ -48,7 +48,7 @@
                 <a class="nav-link" href="#">Subject</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{{route('getUserById')}}">Profile</a>
+                <a class="nav-link" href="{{route('profile')}}">Profile</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="{{route('login')}}">Logout</a>
@@ -125,6 +125,7 @@
           </div>
         </div>
       </section>
+      <a class="btn btn-primary" href="{{route('editProfile')}}" role="button">Update</a>
 
     <!-- Optional JavaScript; choose one of the two! -->
 

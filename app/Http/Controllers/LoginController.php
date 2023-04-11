@@ -24,7 +24,6 @@ class LoginController extends Controller
         // dd($checkPass);
         if ($user != null && $checkPass == true) {
             Auth::login($user);
-            // dd(Auth::user());
             return redirect()->route('home');
         }
         
