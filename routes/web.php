@@ -1,10 +1,10 @@
 <?php
 
+use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
-use App\Http\Controllers\UpdateProfile;
 use App\Http\Controllers\UserController;
 
 /*
@@ -44,6 +44,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/logout', [LogoutController::class, 'logout']);
     Route::get('/update-profile', [UserController::class,'edit'])->name('editProfile');
     Route::POST('/update-profile', [UserController::class,'updateUser'])->name('submitProfile');
+    Route::get('/change-password', [ChangePasswordController::class,'index']);
+    Route::put('/change-password', [ChangePasswordController::class,'changePassword']);
 
 });
 
