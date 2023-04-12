@@ -17,11 +17,10 @@ class LoginController extends Controller
 
         $this->validate($request,[
             'email' => 'required|email::filter',
-            'password' => 'required'
+            'password' => 'required',
         ]);
         $user = User::whereEmail($request->email)->first();
         $checkPass = Hash::check($request->password, $user->password);
-        // dd($checkPass);
         if ($user != null && $checkPass == true) {
             Auth::login($user);
             return redirect()->route('home');

@@ -80,12 +80,12 @@
                     <hr>
                 </div>
                 <!-- Form START -->
-                <form class="file-upload" action="{{route('submitProfile')}}" method="POST">
+                <form class="file-upload" action="{{route('submitProfile')}}" method="POST" enctype="multipart/form-data">
                   @csrf
                   @method("POST")
                   <div class="row mb-5 gx-5">
                         <!-- Contact detail -->
-                        <div class="col-xxl-8 mb-5 mb-xxl-0">
+                      <div class="col-xxl-8 mb-5 mb-xxl-0">
                             <div class="bg-secondary-soft px-4 py-5 rounded">
                                 <div class="row g-3">
                                     <h4 class="mb-4 mt-0">Contact detail</h4>
@@ -109,31 +109,14 @@
                                         <label for="inputEmail4" class="form-label">Email *</label>
                                         <input name="email" type="email" class="form-control" id="inputEmail4" value="{{$user->email}}">
                                     </div>
-                                </div> <!-- Row END -->
-                            </div>
-                        </div>
-                        <!-- Upload profile -->
-                        <div class="col-xxl-4">
-                            <div class="bg-secondary-soft px-4 py-5 rounded">
-                                <div class="row g-3">
-                                    <h4 class="mb-4 mt-0">Upload your profile photo</h4>
-                                    <div class="text-center">
-                                        <!-- Image upload -->
-                                        <div class="square position-relative display-2 mb-3">
-                                            <i class="fas fa-fw fa-user position-absolute top-50 start-50 translate-middle text-secondary"></i>
-                                        </div>
-                                        <!-- Button -->
-                                        <input type="file" id="customFile" name="file" hidden="">
-                                        <label class="btn btn-success-soft btn-block" for="customFile">Upload</label>
-                                        <button type="button" class="btn btn-danger-soft">Remove</button>
-                                        <!-- Content -->
-                                        <p class="text-muted mt-3 mb-0"><span class="me-1">Note:</span>Minimum size 300px x 300px</p>
+                                    <div class="col-md-6">
+                                      <label class="btn btn-success-soft btn-block" for="customFile">Change Avatar</label>
+                                      <input type="file" name="avatar" class="form-control" id="customFile">
                                     </div>
-                                </div>
+                                  </div> <!-- Row END -->
                             </div>
                         </div>
-                    </div> <!-- Row END -->
-    
+                      </div> <!-- Row END -->
                     <!-- button -->
                     <div class="gap-3 d-md-flex justify-content-md-end text-center">
                         <button type="submit" class="btn btn-primary btn-lg">Update profile</button>

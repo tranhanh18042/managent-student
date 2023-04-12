@@ -28,6 +28,7 @@ class UserRequest extends FormRequest
             'email' => 'required|email:rfc,dns',
             'phone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
             'address' => 'required',
+            'avatar' => 'nullable|image',
         ];
     }
 }

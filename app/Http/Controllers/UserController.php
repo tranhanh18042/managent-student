@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UserRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
+use Faker\Core\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -25,12 +27,25 @@ class UserController extends Controller
         return view('updateProfile', compact('user'));
     }
 
-    public function updateUser(UserRequest $request){
+    public function updateUser(Request $request){
         $user = Auth::user();
-        $input = $request->safe()->only(['name', 'email','phone', 'address']);
-        DB::table('users')
+        if($request->has('avatar')){
+            $file = $request->file('avatar');
+            $name = time().'-'.$user->id.'-'.'avatar.'.$file->getClientOriginalExtension();
+            Storage::put($name,file_get_contents($file));
+            $input = $request->all(['avatar']);
+            $input['avatar'] = Storage::url($name);
+            dd($input['avatar']);
+            DB::table('users')
+                ->where('email', $user->email)
+                ->update($input);
+        }else{
+            $input = $request->all(['name', 'email','phone', 'address']);
+            DB::table('users')
             ->where('email', $user->email)
-            ->update($input);  
+            ->update($input);
+        }
+  
         return redirect()->route('profile');
     }
     public function createUser(Request $request){
