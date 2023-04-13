@@ -2,20 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\SubjectResource;
 use App\Models\Subject;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SubjectController extends Controller
 {
     public function getListSubject(){
         $list_subject = Subject::all();
-        // dd($list_subject);
         return view('listSubject', compact('list_subject'));
     }
-    public function subjectDetail(){
-        return view('subjectDetail');
-    }
+    public function subjectDetail($id){
+        $subject = Subject::find($id);
+        $user = User::find(Subject::find($id)->teacher_id);
+        return view('subjectDetail',compact('subject', 'user'));
+    }        
     public function updateSubjectByID(Request $request,int $id){
         $subject = Subject::where('id',$id)->update($request->all());
         return $subject;
