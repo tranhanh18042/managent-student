@@ -4,21 +4,23 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\SubjectResource;
 use App\Models\Subject;
-use GuzzleHttp\Promise\Create;
 use Illuminate\Http\Request;
 
 class SubjectController extends Controller
 {
     public function getListSubject(){
-        return SubjectResource::collection(Subject::all());
+        $list_subject = Subject::all();
+        // dd($list_subject);
+        return view('listSubject', compact('list_subject'));
     }
-    public function getSubjectByID(int $id){
-        return new SubjectResource(Subject::findOrFail($id));
+    public function subjectDetail(){
+        return view('subjectDetail');
     }
     public function updateSubjectByID(Request $request,int $id){
         $subject = Subject::where('id',$id)->update($request->all());
         return $subject;
     }
+
     public function createSubject(Request $request,Subject $subject){
         $subject = Subject::created([
             'subject_name'=> $request -> subject_name,

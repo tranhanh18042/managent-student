@@ -12,64 +12,64 @@
   </head>
   <body>
     <section>
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <!-- Container wrapper -->
-        <div class="container-fluid">
-          <!-- Toggle button -->
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-mdb-toggle="collapse"
-            data-mdb-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <i class="fas fa-bars"></i>
-          </button>
-      
-          <!-- Collapsible wrapper -->
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <!-- Navbar brand -->
-            <a class="navbar-brand mt-2 mt-lg-0" href="#">
-              <img
-                src="https://mdbcdn.b-cdn.net/img/logo/mdb-transaprent-noshadows.webp"
-                height="15"
-                alt="MDB Logo"
-                loading="lazy"
-              />
-            </a>
-            <!-- Left links -->
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link" href="{{route('home')}}">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{{route('subjects')}}">Subject</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{{route('profile')}}">Profile</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{{route('login')}}">Logout</a>
-              </li>
-            </ul>
-            <!-- Left links -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <!-- Container wrapper -->
+          <div class="container-fluid">
+            <!-- Toggle button -->
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-mdb-toggle="collapse"
+              data-mdb-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <i class="fas fa-bars"></i>
+            </button>
+        
+            <!-- Collapsible wrapper -->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <!-- Navbar brand -->
+              <a class="navbar-brand mt-2 mt-lg-0" href="#">
+                <img
+                  src="https://mdbcdn.b-cdn.net/img/logo/mdb-transaprent-noshadows.webp"
+                  height="15"
+                  alt="MDB Logo"
+                  loading="lazy"
+                />
+              </a>
+              <!-- Left links -->
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                  <a class="nav-link" href="{{route('home')}}">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Subject</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{{route('profile')}}">Profile</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{{route('login')}}">Logout</a>
+                </li>
+              </ul>
+              <!-- Left links -->
+            </div>
+            <!-- Collapsible wrapper -->
+        
+            <!-- Right elements -->
+            <div class="d-flex align-items-center">
+              <!-- Icon -->
+              <a class="text-reset me-3" href="#">
+                <i class="fas fa-shopping-cart"></i>
+              </a>
+            <!-- Right elements -->
           </div>
-          <!-- Collapsible wrapper -->
-      
-          <!-- Right elements -->
-          <div class="d-flex align-items-center">
-            <!-- Icon -->
-            <a class="text-reset me-3" href="#">
-              <i class="fas fa-shopping-cart"></i>
-            </a>
-          <!-- Right elements -->
-        </div>
-        <!-- Container wrapper -->
-      </nav>
-    </section>
-    <section style="background-color: #eee;">
+          <!-- Container wrapper -->
+        </nav>
+      </section>
+      <section style="background-color: #eee;">
         <div class="container py-5">
           <div class="row">
             <div class="col-lg-4">
@@ -77,7 +77,7 @@
                 <div class="card-body text-center">
                   <img src="storage/app/1681296170-3-avatar.png" alt="avatar"
                     class="rounded-circle img-fluid" style="width: 150px;">
-                  <h5 class="my-3">{{$userRes->name}}</h5>
+                  <h5 class="my-3">1</h5>
                 </div>
               </div>
             </div>
@@ -89,7 +89,7 @@
                       <p class="mb-0">Full Name</p>
                     </div>
                     <div class="col-sm-9">
-                      <p class="text-muted mb-0">{{$userRes->name}}</p>
+                      <p class="text-muted mb-0">1</p>
                     </div>
                   </div>
                   <hr>
@@ -98,7 +98,7 @@
                       <p class="mb-0">Email</p>
                     </div>
                     <div class="col-sm-9">
-                      <p class="text-muted mb-0">{{$userRes->email}}</p>
+                      <p class="text-muted mb-0">1</p>
                     </div>
                   </div>
                   <hr>
@@ -107,7 +107,7 @@
                       <p class="mb-0">Phone</p>
                     </div>
                     <div class="col-sm-9">
-                      <p class="text-muted mb-0">{{$userRes->phone}}</p>
+                      <p class="text-muted mb-0">1</p>
                     </div>
                   </div>
                   <hr>
@@ -116,7 +116,7 @@
                       <p class="mb-0">Address</p>
                     </div>
                     <div class="col-sm-9">
-                      <p class="text-muted mb-0">{{$userRes->address}}</p>
+                      <p class="text-muted mb-0">1</p>
                     </div>
                   </div>
                 </div>
@@ -125,7 +125,7 @@
           </div>
         </div>
       </section>
-      <a class="btn btn-primary" href="{{route('editProfile')}}" role="button">Update</a>
+    
 
     <!-- Optional JavaScript; choose one of the two! -->
 
