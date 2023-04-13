@@ -43,7 +43,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/user', [UserController::class, 'getUserById'])->name('profile');
     Route::get('/logout', [LogoutController::class, 'logout']);
     Route::get('/update-profile', [UserController::class,'edit'])->name('editProfile');
-    Route::POST('/update-profile', [UserController::class,'updateUser'])->name('submitProfile');
+    Route::post('/update-profile', [UserController::class,'updateUser'])->name('submitProfile');
     Route::get('/change-password', [ChangePasswordController::class,'index']);
     Route::put('/change-password', [ChangePasswordController::class,'changePassword']);
 

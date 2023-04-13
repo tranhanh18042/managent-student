@@ -27,6 +27,7 @@ class UserFactory extends Factory
             'email_verified_at' => now(),
             'password' => Hash::make('123456'), // password
             'remember_token' => Str::random(10),
+            'avatar' => fake()->imageUrl($with=400,$height = 400),
         ];
     }
 
