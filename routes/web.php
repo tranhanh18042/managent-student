@@ -49,6 +49,6 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/change-password', [ChangePasswordController::class,'changePassword']);
     Route::get('/subjects', [SubjectController::class, 'getListSubject'])->name('subjects');
 });
-Route::get('/subject-detail', [SubjectController::class, 'subjectDetail'])->name('subject.detail');
+Route::get('/subject-detail/{id}', [SubjectController::class, 'subjectDetail'])->name('subject.detail');
 
 

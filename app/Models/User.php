@@ -46,7 +46,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function Subject(){
-        return $this->belongsToMany(Subject::class,'user_subjects','subject_id','user_id');
+    public function subject(){
+        return $this->belongsToMany(Subject::class,'user_subjects','user_id','subject_id');
     }
 }

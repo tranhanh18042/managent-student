@@ -84,7 +84,7 @@
                   <th scope="row">{{$subject->id}}</th>
                   <td>{{$subject->subject_name}}</td>
                   <td>
-                    <a href="{{route('subject.detail')}}" role="button" type="button" class="btn btn-light">Chi tiết</a>
+                    <a href="{{ url('/subject-detail/' .$subject->id)}}" role="button" type="button" class="btn btn-light">Chi tiết</a>
                     <a href="#" role="button" type="button" class="btn btn-info">Sửa</a>
                     <button type="submit" class="btn btn-danger">Xóa</button>
                   </td>

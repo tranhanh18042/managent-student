@@ -72,51 +72,51 @@
       <section style="background-color: #eee;">
         <div class="container py-5">
           <div class="row">
-            <div class="col-lg-4">
-              <div class="card mb-4">
-                <div class="card-body text-center">
-                  <img src="storage/app/1681296170-3-avatar.png" alt="avatar"
-                    class="rounded-circle img-fluid" style="width: 150px;">
-                  <h5 class="my-3">1</h5>
-                </div>
-              </div>
-            </div>
             <div class="col-lg-8">
               <div class="card mb-4">
                 <div class="card-body">
                   <div class="row">
                     <div class="col-sm-3">
-                      <p class="mb-0">Full Name</p>
+                      <p class="mb-0">Subject Name</p>
                     </div>
                     <div class="col-sm-9">
-                      <p class="text-muted mb-0">1</p>
+                      <p class="text-muted mb-0">{{$subject->subject_name}}</p>
                     </div>
                   </div>
                   <hr>
                   <div class="row">
                     <div class="col-sm-3">
-                      <p class="mb-0">Email</p>
+                      <p class="mb-0">Email Teacher</p>
                     </div>
                     <div class="col-sm-9">
-                      <p class="text-muted mb-0">1</p>
+                      <p class="text-muted mb-0">{{$user->email}}</p>
                     </div>
                   </div>
                   <hr>
                   <div class="row">
                     <div class="col-sm-3">
-                      <p class="mb-0">Phone</p>
+                      <p class="mb-0">Phone Teacher</p>
                     </div>
                     <div class="col-sm-9">
-                      <p class="text-muted mb-0">1</p>
+                      <p class="text-muted mb-0">{{$user->phone}}</p>
                     </div>
                   </div>
                   <hr>
                   <div class="row">
                     <div class="col-sm-3">
-                      <p class="mb-0">Address</p>
+                      <p class="mb-0">Sart Date</p>
                     </div>
                     <div class="col-sm-9">
-                      <p class="text-muted mb-0">1</p>
+                      <p class="text-muted mb-0">{{$subject->start_date}}</p>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">End date</p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">{{$subject->end_date}}</p>
                     </div>
                   </div>
                 </div>
@@ -125,6 +125,7 @@
           </div>
         </div>
       </section>
+      <a class="btn btn-primary" href="{{route('subjects')}}">Back</a>
     
 
     <!-- Optional JavaScript; choose one of the two! -->
