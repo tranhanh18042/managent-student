@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
+use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\UserController;
 
 /*
@@ -46,6 +47,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/update-profile', [UserController::class,'updateUser'])->name('submitProfile');
     Route::get('/change-password', [ChangePasswordController::class,'index']);
     Route::put('/change-password', [ChangePasswordController::class,'changePassword']);
-
+    Route::get('/subjects', [SubjectController::class, 'getListSubject'])->name('subjects');
 });
+Route::get('/subject-detail', [SubjectController::class, 'subjectDetail'])->name('subject.detail');
+
 
