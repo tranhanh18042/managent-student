@@ -69,25 +69,32 @@
           <!-- Container wrapper -->
         </nav>
       </section>
-    <a href="#" role="button" type="button" class="btn btn-success">Thêm</a>
-
+      @if ($user->role == 1)
+      <a href="#" role="button" type="button" class="btn btn-success">Thêm</a>
+      @endif
     <table class="table">
         <thead>
           <tr>
-            <th scope="col">STT</th>
             <th scope="col">Subject Name</Address></th>
         </tr>
         </thead>
         <tbody>
             @foreach($list_subject as $subject)
               <tr>
-                  <th scope="row">{{$subject->id}}</th>
                   <td>{{$subject->subject_name}}</td>
-                  <td>
-                    <a href="{{ url('/subject-detail/' .$subject->id)}}" role="button" type="button" class="btn btn-light">Chi tiết</a>
-                    <a href="#" role="button" type="button" class="btn btn-info">Sửa</a>
-                    <button type="submit" class="btn btn-danger">Xóa</button>
-                  </td>
+                  @if ($user->role == 1)
+                    <td>
+                      <a href="{{ url('/subject-detail/' .$subject->id)}}" role="button" type="button" class="btn btn-light">Chi tiết</a>
+                      <a href="#" role="button" type="button" class="btn btn-info">Sửa</a>
+                      <button type="submit" class="btn btn-danger">Xóa</button>
+                    </td>
+                  @endif
+                  @if ($user->role == 0)
+                    <td>
+                      <a href="{{ url('/subject-detail/' .$subject->id)}}" role="button" type="button" class="btn btn-light">Chi tiết</a>
+                      <a href="#" role="button" type="button" class="btn btn-info">Tham gia</a>
+                    </td>
+                  @endif
               </tr>
             @endforeach
       </table>
