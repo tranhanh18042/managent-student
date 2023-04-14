@@ -10,8 +10,11 @@ use Illuminate\Support\Facades\Auth;
 class SubjectController extends Controller
 {
     public function getListSubject(){
-        $list_subject = Subject::all();
-        return view('listSubject', compact('list_subject'));
+        $user = User::find(Auth::user()->id);
+        $subject_applies = $user->subject()->pluck('subject_id');
+        $list_subject = Subject::whereNotIn('id', $subject_applies)->get();
+        // dd($list_subject);  
+        return view('listSubject', compact('list_subject','user'));
     }
     public function subjectDetail($id){
         $subject = Subject::find($id);
