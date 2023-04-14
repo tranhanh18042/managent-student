@@ -24,8 +24,10 @@ class SubjectRequest extends FormRequest
     public function rules()
     {
         return [
-            'id' => 'required',
             'subject_name' => 'required',
+            'teacher_id' => 'nullable',
+            'start_date' => 'nullable',
+            'end_date' => 'nullable',
         ];
     }
 }
