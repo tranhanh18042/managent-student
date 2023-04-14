@@ -12,9 +12,9 @@ class SubjectController extends Controller
     public function getListSubject(){
         $user = User::find(Auth::user()->id);
         $subject_applies = $user->subject()->pluck('subject_id');
+        $list_subject_teacher = $user->subject()->get();
         $list_subject = Subject::whereNotIn('id', $subject_applies)->get();
-        // dd($list_subject);  
-        return view('listSubject', compact('list_subject','user'));
+        return view('listSubject', compact('list_subject','user','list_subject_teacher'));
     }
     public function subjectDetail($id){
         $subject = Subject::find($id);
@@ -26,7 +26,7 @@ class SubjectController extends Controller
         return $subject;
     }
 
-    public function createSubject(Request $request,Subject $subject){
+    public function createSubject(Request $request){
         $subject = Subject::created([
             'subject_name'=> $request -> subject_name,
             'teacher_id'=> $request -> teacher_id,

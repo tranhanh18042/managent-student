@@ -70,9 +70,30 @@
         </nav>
       </section>
       @if ($user->role == 1)
-      <a href="#" role="button" type="button" class="btn btn-success">Thêm</a>
+        <a href="#" role="button" type="button" class="btn btn-success">Thêm</a>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Subject Name</Address></th>
+          </tr>
+          </thead>
+          <tbody>
+              @foreach($list_subject_teacher as $subject)
+                <tr>
+                    <td>{{$subject->subject_name}}</td>
+                    @if ($user->role == 1)
+                      <td>
+                        <a href="{{ url('/subject-detail/' .$subject->id)}}" role="button" type="button" class="btn btn-light">Chi tiết</a>
+                        <a href="#" role="button" type="button" class="btn btn-info">Sửa</a>
+                        <button type="submit" class="btn btn-danger">Xóa</button>
+                      </td>
+                    @endif
+                </tr>
+              @endforeach
+        </table>
       @endif
-    <table class="table">
+      @if($user->role == 0)
+      <table class="table">
         <thead>
           <tr>
             <th scope="col">Subject Name</Address></th>
@@ -82,22 +103,14 @@
             @foreach($list_subject as $subject)
               <tr>
                   <td>{{$subject->subject_name}}</td>
-                  @if ($user->role == 1)
-                    <td>
-                      <a href="{{ url('/subject-detail/' .$subject->id)}}" role="button" type="button" class="btn btn-light">Chi tiết</a>
-                      <a href="#" role="button" type="button" class="btn btn-info">Sửa</a>
-                      <button type="submit" class="btn btn-danger">Xóa</button>
-                    </td>
-                  @endif
-                  @if ($user->role == 0)
                     <td>
                       <a href="{{ url('/subject-detail/' .$subject->id)}}" role="button" type="button" class="btn btn-light">Chi tiết</a>
                       <a href="#" role="button" type="button" class="btn btn-info">Tham gia</a>
                     </td>
-                  @endif
               </tr>
             @endforeach
       </table>
+      @endif
 
     <!-- Optional JavaScript; choose one of the two! -->
 
