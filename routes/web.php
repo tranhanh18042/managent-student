@@ -47,8 +47,11 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/update-profile', [UserController::class,'updateUser'])->name('submitProfile');
     Route::get('/change-password', [ChangePasswordController::class,'index']);
     Route::put('/change-password', [ChangePasswordController::class,'changePassword']);
+
     Route::get('/subjects', [SubjectController::class, 'getListSubject'])->name('subjects');
     Route::get('/subject-detail/{id}', [SubjectController::class, 'subjectDetail'])->name('subject.detail');
 });
 
 
+Route::get('/subject', [SubjectController::class, 'indexAddSubject'])->name('create.subject');
+Route::post('/subject', [SubjectController::class, 'createSubject']);

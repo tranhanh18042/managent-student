@@ -70,7 +70,7 @@
         </nav>
       </section>
       @if ($user->role == 1)
-        <a href="#" role="button" type="button" class="btn btn-success">Thêm</a>
+        <a href="{{ url('/subject')}}" class="btn btn-success">Thêm</a>
         <table class="table">
           <thead>
             <tr>
