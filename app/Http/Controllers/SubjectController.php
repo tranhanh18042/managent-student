@@ -14,7 +14,7 @@ class SubjectController extends Controller
     public function getListSubject(){
         $user = User::find(Auth::user()->id);
         $subject_applies = $user->subject()->pluck('subject_id');
-        $list_subject_teacher = Subject::find($user->id)->get();
+        $list_subject_teacher = Subject::where('teacher_id',$user->id)->get();
         $list_subject = Subject::whereNotIn('id', $subject_applies)->get();
         return view('listSubject', compact('list_subject','user','list_subject_teacher'));
     }
