@@ -16,6 +16,6 @@ class Subject extends Model
         'end_date',
     ];
     public function user(){
-        return $this->belongsToMany(User::class,'user_subjects','user_id','subject_id');
+        return $this->belongsToMany(User::class,'user_subjects','subject_id','user_id');
     }
 }

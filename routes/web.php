@@ -54,4 +54,5 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/subject', [SubjectController::class, 'indexAddSubject'])->name('create.subject');
     Route::post('/subject', [SubjectController::class, 'createSubject']);
 
+    
 });
