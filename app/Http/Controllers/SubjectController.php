@@ -21,7 +21,9 @@ class SubjectController extends Controller
     public function subjectDetail($id){
         $subject = Subject::find($id);
         $user = User::find(Subject::find($id)->teacher_id);
-        return view('subjectDetail',compact('subject', 'user'));
+        $student = $subject->user()->get();
+        $role_user_login = Auth::user()->role;
+        return view('subjectDetail',compact('subject', 'user','student','role_user_login'));
     }        
     public function updateSubjectByID(Request $request,int $id){
         $subject = Subject::where('id',$id)->update($request->all());
