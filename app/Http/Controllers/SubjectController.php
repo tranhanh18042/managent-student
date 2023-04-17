@@ -71,15 +71,23 @@ class SubjectController extends Controller
         }
         return redirect('subjects');
     }
-    public function addStudent(Request $request,int $id)
+    public function addStudent(Request $request, int $id)
     {
         $request->validate([
             'id' => 'required',
         ]);
         $user = User::find($request->id);
         $subject = Subject::find($id);
-        if ($user != null && $user->role == 0) {    
+        if ($user != null && $user->role == 0) {
             $subject->user()->attach($user->id);
+        }
+        return redirect()->back();
+    }
+    public function removeStudent(int $user_id, int $subject_id)
+    {
+        $subject = Subject::find($subject_id);
+        if (Auth::user()->role == 1) {
+            $subject->user()->detach($user_id);
         }
         return redirect()->back();
     }

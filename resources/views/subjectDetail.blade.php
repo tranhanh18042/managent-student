@@ -119,7 +119,7 @@
         </div>
     </section>
     <section>
-        <form action="{{url('/add-student'.'/'. $subject->id)}}" method="POST">
+        <form action="{{ url('/add-student' . '/' . $subject->id) }}" method="POST">
             @csrf
             @method('POST')
             <label class="form-label">ID *</label>
@@ -140,12 +140,18 @@
                 </thead>
                 <tbody>
                     @foreach ($student as $student)
-                        <tr>
-                            <td>{{ $student->name }}</td>
-                            <td>{{ $student->address }}</td>
-                            <td>{{ $student->email }}</td>
-                            <td>@mdo</td>
-                        </tr>
+                        <form action="{{url('remove-student'.'/'.$student->id .'/'.$subject->id)}}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <tr>
+                                <td>{{ $student->name }}</td>
+                                <td>{{ $student->address }}</td>
+                                <td>{{ $student->email }}</td>
+                                <td>
+                                    <button type="submit" class="btn btn-danger">Xóa</button>
+                                </td>
+                            </tr>
+                        </form>
                     @endforeach
                 </tbody>
             </table>
