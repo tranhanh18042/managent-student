@@ -38,13 +38,18 @@
                             <a class="nav-link" href="{{ route('home') }}">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('subjects')}}">Subject</a>
+                            <a class="nav-link" href="{{ route('subjects') }}">Subject</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('profile') }}">Profile</a>
                         </li>
+                        @if (Auth::user()->role == 1)
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('listUsers') }}">Students</a>
+                            </li>
+                        @endif
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('listUsers') }}">Students</a>
+                            <a class="nav-link" href="{{ route('change.password') }}">Change Password</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('login') }}">Logout</a>
