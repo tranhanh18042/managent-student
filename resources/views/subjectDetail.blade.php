@@ -43,6 +43,14 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('profile') }}">Profile</a>
                         </li>
+                        @if (Auth::user()->role == 1)
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('listUsers') }}">Students</a>
+                            </li>
+                        @endif
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('change.password') }}">Change Password</a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('login') }}">Logout</a>
                         </li>
@@ -142,7 +150,8 @@
                 </thead>
                 <tbody>
                     @foreach ($student as $student)
-                        <form action="{{ url('remove-student' . '/' . $student->id . '/' . $subject->id) }}" method="POST">
+                        <form action="{{ url('remove-student' . '/' . $student->id . '/' . $subject->id) }}"
+                            method="POST">
                             @csrf
                             @method('DELETE')
                             <tr>

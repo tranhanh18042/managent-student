@@ -2,10 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\UserRequest;
-use App\Http\Resources\UserResource;
 use App\Models\User;
-use Faker\Core\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -15,8 +12,8 @@ use Illuminate\Support\Facades\Storage;
 class UserController extends Controller
 {
     public function getListUsers(){
-        $users = UserResource::collection(User::all());
-        return view('listUsers', ['users' => $users]);
+        $users = User::where('role', 0)->get();
+        return view('listUsers', compact('users'));
     }
     public function getUserByID(){
         $userRes = Auth::user();

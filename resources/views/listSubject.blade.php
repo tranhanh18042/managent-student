@@ -38,10 +38,18 @@
                             <a class="nav-link" href="{{ route('home') }}">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Subject</a>
+                            <a class="nav-link" href="{{ route('subjects') }}">Subject</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('profile') }}">Profile</a>
+                        </li>
+                        @if (Auth::user()->role == 1)
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('listUsers') }}">Students</a>
+                            </li>
+                        @endif
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('change.password') }}">Change Password</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('login') }}">Logout</a>
@@ -93,7 +101,7 @@
     @endif
     @if ($user->role == 0)
         <table class="table">
-            <a href="{{route('list.subject.student')}}" class="btn btn-success">My Subject</a>
+            <a href="{{ route('list.subject.student') }}" class="btn btn-success">My Subject</a>
             <thead>
                 <tr>
                     <th scope="col">New Subject</Address>
@@ -102,8 +110,9 @@
             </thead>
             <tbody>
                 @foreach ($list_subject as $subject)
-                    <form action="{{ url('/join-subject/' . $subject->id) }}" method="GET">
+                    <form action="{{ url('/join-subject/' . $subject->id) }}" method="POST">
                         @csrf
+                        @method('POST')
                         <tr>
                             <td>{{ $subject->subject_name }}</td>
                             <td>

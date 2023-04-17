@@ -37,7 +37,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/logout', [LogoutController::class, 'logout']);
     Route::get('/update-profile', [UserController::class,'edit'])->name('editProfile');
     Route::post('/update-profile', [UserController::class,'updateUser'])->name('submitProfile');
-    Route::get('/change-password', [ChangePasswordController::class,'index']);
+    Route::get('/change-password', [ChangePasswordController::class,'index'])->name('change.password');
     Route::put('/change-password', [ChangePasswordController::class,'changePassword']);
 
     Route::get('/subjects', [SubjectController::class, 'getListSubject'])->name('subjects');
@@ -52,6 +52,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/add-student/{id}', [SubjectController::class, 'addStudent']);
     Route::delete('/remove-student/{user_id}/{subject_id}',[SubjectController::class, 'removeStudent']);
     Route::post('/join-subject/{id}', [SubjectController::class, 'joinSubject']);
+    
     ROute::get('/list-subject-student',[SubjectController::class , 'showListSubjectStudent'])->name('list.subject.student');
 
 });
