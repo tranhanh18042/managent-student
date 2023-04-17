@@ -9,6 +9,7 @@ use App\Models\UserSubject;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class SubjectController extends Controller
 {
@@ -92,6 +93,15 @@ class SubjectController extends Controller
         $subject = Subject::find($subject_id);
         if (Auth::user()->role == 1) {
             $subject->user()->detach($user_id);
+        }
+        return redirect()->back();
+    }
+    public function joinSubject(int $id)
+    {
+        $subject = Subject::find($id);
+        $user = Auth::user();
+        if ($user->role == 0) {
+            $subject->user()->attach($user->id);
         }
         return redirect()->back();
     }
