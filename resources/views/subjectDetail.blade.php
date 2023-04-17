@@ -38,7 +38,7 @@
                             <a class="nav-link" href="{{ route('home') }}">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('subjects')}}">Subject</a>
+                            <a class="nav-link" href="{{ route('subjects') }}">Subject</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('profile') }}">Profile</a>
@@ -119,26 +119,36 @@
         </div>
     </section>
     <section>
+        <form action="{{url('/add-student'.'/'. $subject->id)}}" method="POST">
+            @csrf
+            @method('POST')
+            <label class="form-label">ID *</label>
+            <input name="id" type="number" value="">
+            <button type="submit" class="btn btn-success">Add Student</button>
+        </form>
+    </section>
+    <section>
         @if ($role_user_login == 1)
-        <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">Name</th>
-                <th scope="col">Address</Address></th>
-                <th scope="col">Email</th>
-            </tr>
-            </thead>
-            <tbody>
-              @foreach($student as $student)
-                <tr>
-                    <td>{{$student->name}}</td>
-                    <td>{{$student->address}}</td>
-                    <td>{{$student->email}}</td>
-                    <td>@mdo</td>
-                </tr>
-              @endforeach
-            </tbody>
-          </table>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Address</Address>
+                        </th>
+                        <th scope="col">Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($student as $student)
+                        <tr>
+                            <td>{{ $student->name }}</td>
+                            <td>{{ $student->address }}</td>
+                            <td>{{ $student->email }}</td>
+                            <td>@mdo</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
         @endif
     </section>
     <a class="btn btn-primary" href="{{ route('subjects') }}">Back</a>
