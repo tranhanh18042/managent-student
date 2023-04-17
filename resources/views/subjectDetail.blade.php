@@ -119,13 +119,15 @@
         </div>
     </section>
     <section>
-        <form action="{{ url('/add-student' . '/' . $subject->id) }}" method="POST">
-            @csrf
-            @method('POST')
-            <label class="form-label">ID *</label>
-            <input name="id" type="number" value="">
-            <button type="submit" class="btn btn-success">Add Student</button>
-        </form>
+        @if ($role_user_login == 1)
+            <form action="{{ url('/add-student' . '/' . $subject->id) }}" method="POST">
+                @csrf
+                @method('POST')
+                <label class="form-label">ID *</label>
+                <input name="id" type="number" value="">
+                <button type="submit" class="btn btn-success">Add Student</button>
+            </form>
+        @endif
     </section>
     <section>
         @if ($role_user_login == 1)
@@ -140,7 +142,7 @@
                 </thead>
                 <tbody>
                     @foreach ($student as $student)
-                        <form action="{{url('remove-student'.'/'.$student->id .'/'.$subject->id)}}" method="POST">
+                        <form action="{{ url('remove-student' . '/' . $student->id . '/' . $subject->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
                             <tr>
