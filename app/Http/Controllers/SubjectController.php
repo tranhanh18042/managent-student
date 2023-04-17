@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\SubjectRequest;
 use App\Models\Subject;
 use App\Models\User;
+use App\Models\UserSubject;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -78,7 +79,10 @@ class SubjectController extends Controller
         ]);
         $user = User::find($request->id);
         $subject = Subject::find($id);
-        if ($user != null && $user->role == 0) {
+        $user_subject = UserSubject::where('user_id', $user->id)
+            ->where('subject_id', $subject->id)
+            ->first();
+        if ($user != null && $user->role == 0 && $user_subject == null) {
             $subject->user()->attach($user->id);
         }
         return redirect()->back();
