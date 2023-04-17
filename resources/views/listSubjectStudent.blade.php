@@ -62,59 +62,30 @@
                 <!-- Container wrapper -->
         </nav>
     </section>
-    @if ($user->role == 1)
-        <a href="{{ url('/subject') }}" class="btn btn-success">Thêm</a>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">Subject Name</Address>
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($list_subject_teacher as $subject)
-                    <form action="{{ url('/delete-subject/' . $subject->id) }}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <tr>
-                            <td>{{ $subject->subject_name }}</td>
-                            @if ($user->role == 1)
-                                <td>
-                                    <a href="{{ url('/subject-detail/' . $subject->id) }}" role="button" type="button"
-                                        class="btn btn-light">Chi tiết</a>
-                                    <a href="{{ url('/update-subject/' . $subject->id) }}" class="btn btn-info">Sửa</a>
-                                    <button type="submit" class="btn btn-danger">Xóa</button>
-                                </td>
-                            @endif
-                        </tr>
-                    </form>
-                @endforeach
-        </table>
-    @endif
+
     @if ($user->role == 0)
         <table class="table">
-            <a href="{{route('list.subject.student')}}" class="btn btn-success">My Subject</a>
             <thead>
                 <tr>
-                    <th scope="col">New Subject</Address>
+                    <th scope="col">My Subject</Address>
                     </th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($list_subject as $subject)
-                    <form action="{{ url('/join-subject/' . $subject->id) }}" method="GET">
-                        @csrf
-                        <tr>
-                            <td>{{ $subject->subject_name }}</td>
-                            <td>
-                                <a href="{{ url('/subject-detail/' . $subject->id) }}" role="button" type="button"
-                                    class="btn btn-light">Chi tiết</a>
-                                <button type="submit" class="btn btn-info">Tham gia</button>
-                            </td>
-                        </tr>
-                    </form>
+                    @csrf
+                    <tr>
+                        <td>{{ $subject->subject_name }}</td>
+                        <td>
+                            <a href="{{ url('/subject-detail/' . $subject->id) }}" role="button" type="button"
+                                class="btn btn-light">Chi tiết</a>
+                            <button type="submit" class="btn btn-danger">Rời</button>
+                        </td>
+                    </tr>
                 @endforeach
         </table>
+        <a href="{{ route('subjects') }}" class="btn btn-primary">Back</a>
+
     @endif
 
     <!-- Optional JavaScript; choose one of the two! -->
