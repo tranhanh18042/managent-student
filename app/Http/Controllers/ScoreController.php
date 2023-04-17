@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ScoreRequest;
 use App\Models\Subject;
 use App\Models\User;
 use App\Models\UserSubject;
@@ -15,7 +16,7 @@ class ScoreController extends Controller
         $subject = Subject::find($subject_id);
         return view('insertScore', compact('user', 'subject'));
     }
-    public function storeScore(int $user_id, int $subject_id, Request $request)
+    public function storeScore(int $user_id, int $subject_id, ScoreRequest $request)
     {
         UserSubject::where('user_id', $user_id)
             ->where('subject_id', $subject_id)
