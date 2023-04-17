@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
+use App\Http\Controllers\ScoreController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\UserController;
 
@@ -53,6 +54,8 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/remove-student/{user_id}/{subject_id}',[SubjectController::class, 'removeStudent']);
     Route::post('/join-subject/{id}', [SubjectController::class, 'joinSubject']);
     
-    ROute::get('/list-subject-student',[SubjectController::class , 'showListSubjectStudent'])->name('list.subject.student');
+    Route::get('/list-subject-student',[SubjectController::class , 'showListSubjectStudent'])->name('list.subject.student');
 
-});
+    Route::get('/score/{user_id}/{subject_id}',[ScoreController::class, 'index'])->name('score');
+    Route::put('/score/{user_id}/{subject_id}', [ScoreController::class, 'storeScore']);
+}); 
