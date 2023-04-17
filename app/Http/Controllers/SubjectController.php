@@ -27,7 +27,7 @@ class SubjectController extends Controller
         $role_user_login = Auth::user()->role;
         return view('subjectDetail', compact('subject', 'user', 'student', 'role_user_login'));
     }
-    public function updateSubject(Request $request,int $id)
+    public function updateSubject(Request $request, int $id)
     {
         $subject = Subject::find($id);
         $subject->subject_name = $request->subject_name;
@@ -59,5 +59,16 @@ class SubjectController extends Controller
     {
         $subject = Subject::find($id);
         return view('updateSubject', compact('subject'));
+    }
+
+    public function deleteSubject(int $id)
+    {
+        $subject = Subject::find($id);
+        $user = $subject->user()->pluck('user_id');
+        $count_user = count($user);
+        if ($count_user == 0) {
+            $subject->delete();
+        }
+        return redirect('subjects');
     }
 }
