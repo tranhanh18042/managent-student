@@ -95,20 +95,24 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th scope="col">Subject Name</Address>
+                    <th scope="col">New Subject</Address>
                     </th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($list_subject as $subject)
-                    <tr>
-                        <td>{{ $subject->subject_name }}</td>
-                        <td>
-                            <a href="{{ url('/subject-detail/' . $subject->id) }}" role="button" type="button"
-                                class="btn btn-light">Chi tiết</a>
-                            <a href="#" role="button" type="button" class="btn btn-info">Tham gia</a>
-                        </td>
-                    </tr>
+                    <form action="{{ url('/join-subject/' . $subject->id) }}" method="POST">
+                        @csrf
+                        @method('POST')
+                        <tr>
+                            <td>{{ $subject->subject_name }}</td>
+                            <td>
+                                <a href="{{ url('/subject-detail/' . $subject->id) }}" role="button" type="button"
+                                    class="btn btn-light">Chi tiết</a>
+                                <button type="submit" class="btn btn-info">Tham gia</button>
+                            </td>
+                        </tr>
+                    </form>
                 @endforeach
         </table>
     @endif

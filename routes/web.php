@@ -51,4 +51,6 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/delete-subject/{id}',[SubjectController::class, 'deleteSubject'])->name('subject.delete');   
     Route::post('/add-student/{id}', [SubjectController::class, 'addStudent']);
     Route::delete('/remove-student/{user_id}/{subject_id}',[SubjectController::class, 'removeStudent']);
+    Route::post('/join-subject/{id}', [SubjectController::class, 'joinSubject']);
+
 });
