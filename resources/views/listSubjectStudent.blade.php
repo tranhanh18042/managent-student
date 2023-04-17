@@ -79,7 +79,6 @@
                         <td>
                             <a href="{{ url('/subject-detail/' . $subject->id) }}" role="button" type="button"
                                 class="btn btn-light">Chi tiết</a>
-                            <button type="submit" class="btn btn-danger">Rời</button>
                         </td>
                     </tr>
                 @endforeach
