@@ -26,14 +26,6 @@ Route::prefix('/users')->group(function () {
     Route::post('/', [UserController::class, 'createUser']);
 });
 
-// Route::prefix('/subjects')->group(function () {
-//     Route::get('/', [SubjectController::class, 'getListSubject']);
-//     Route::get('/{id}', [SubjectController::class, 'getSubjectByID']);
-//     Route::put('/{id}', [SubjectController::class, 'updateSubjectByID']);
-//     Route::post('/', [SubjectController::class, 'createSubject']);
-
-// });
-
 
 Route::get('/login', [LoginController::class, 'showloginErr'])->name('login');
 Route::post('/login-custom', [LoginController::class, 'login'])->name('login.custom'); 
@@ -54,5 +46,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/subject', [SubjectController::class, 'indexAddSubject'])->name('create.subject');
     Route::post('/subject', [SubjectController::class, 'createSubject']);
 
+    Route::get('/update-subject/{id}', [SubjectController::class, 'indexUpdateSubject'])->name('update.subject');
+    Route::put('/update-subject/{id}', [SubjectController::class, 'updateSubject']);
     
 });

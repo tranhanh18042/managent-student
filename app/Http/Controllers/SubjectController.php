@@ -11,30 +11,39 @@ use Illuminate\Support\Facades\Auth;
 
 class SubjectController extends Controller
 {
-    public function getListSubject(){
+    public function getListSubject()
+    {
         $user = User::find(Auth::user()->id);
         $subject_applies = $user->subject()->pluck('subject_id');
-        $list_subject_teacher = Subject::where('teacher_id',$user->id)->get();
+        $list_subject_teacher = Subject::where('teacher_id', $user->id)->get();
         $list_subject = Subject::whereNotIn('id', $subject_applies)->get();
-        return view('listSubject', compact('list_subject','user','list_subject_teacher'));
+        return view('listSubject', compact('list_subject', 'user', 'list_subject_teacher'));
     }
-    public function subjectDetail($id){
+    public function subjectDetail(int $id)
+    {
         $subject = Subject::find($id);
         $user = User::find(Subject::find($id)->teacher_id);
         $student = $subject->user()->get();
         $role_user_login = Auth::user()->role;
-        return view('subjectDetail',compact('subject', 'user','student','role_user_login'));
-    }        
-    public function updateSubjectByID(Request $request,int $id){
-        $subject = Subject::where('id',$id)->update($request->all());
-        return $subject;
+        return view('subjectDetail', compact('subject', 'user', 'student', 'role_user_login'));
+    }
+    public function updateSubject(Request $request,int $id)
+    {
+        $subject = Subject::find($id);
+        $subject->subject_name = $request->subject_name;
+        $subject->start_date = $request->start_date;
+        $subject->end_date = $request->end_date;
+        $subject->save();
+        return redirect('subjects');
     }
 
-    public function indexAddSubject(){
+    public function indexAddSubject()
+    {
         $user = Auth::user();
         return view('createSubject', compact('user'));
     }
-    public function createSubject(SubjectRequest $request){
+    public function createSubject(SubjectRequest $request)
+    {
 
         Subject::create([
             'subject_name' => $request->subject_name,
@@ -46,5 +55,9 @@ class SubjectController extends Controller
         ]);
         return redirect('subjects');
     }
-
+    public function indexUpdateSubject($id)
+    {
+        $subject = Subject::find($id);
+        return view('updateSubject', compact('subject'));
+    }
 }
