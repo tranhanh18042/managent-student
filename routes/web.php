@@ -52,5 +52,6 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/add-student/{id}', [SubjectController::class, 'addStudent']);
     Route::delete('/remove-student/{user_id}/{subject_id}',[SubjectController::class, 'removeStudent']);
     Route::post('/join-subject/{id}', [SubjectController::class, 'joinSubject']);
+    ROute::get('/list-subject-student',[SubjectController::class , 'showListSubjectStudent'])->name('list.subject.student');
 
 });

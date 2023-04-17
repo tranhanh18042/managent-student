@@ -105,4 +105,10 @@ class SubjectController extends Controller
         }
         return redirect()->back();
     }
+    public function showListSubjectStudent()
+    {
+        $user = User::find(Auth::user()->id);
+        $list_subject = $user->subject()->get();
+        return view('listSubjectStudent', compact('list_subject','user'));
+    }
 }
