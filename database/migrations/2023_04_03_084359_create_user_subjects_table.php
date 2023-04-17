@@ -19,8 +19,8 @@ return new class extends Migration
             $table->unsignedBigInteger('subject_id');
             $table->foreign('subject_id')->references('id')->on('subjects');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->float('score_process');
-            $table->float('score_test');
+            $table->float('score_process')->nullable();
+            $table->float('score_test')->nullable();
             $table->timestamps();
         });
     }

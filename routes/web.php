@@ -48,5 +48,6 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/update-subject/{id}', [SubjectController::class, 'indexUpdateSubject'])->name('update.subject');
     Route::put('/update-subject/{id}', [SubjectController::class, 'updateSubject']);
-    Route::delete('/delete-subject/{id}',[SubjectController::class, 'deleteSubject'])->name('subject.delete');    
+    Route::delete('/delete-subject/{id}',[SubjectController::class, 'deleteSubject'])->name('subject.delete');   
+    Route::post('/add-student/{id}', [SubjectController::class, 'addStudent']);
 });
