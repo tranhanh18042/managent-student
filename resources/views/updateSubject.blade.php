@@ -46,6 +46,11 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('profile') }}">Profile</a>
                         </li>
+                        @if (Auth::user()->role == 1)
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('listUsers') }}">Students</a>
+                            </li>
+                        @endif
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('login') }}">Logout</a>
                         </li>
@@ -84,18 +89,20 @@
                                 <div class="row g-3">
                                     <div class="col-md-6">
                                         <label class="form-label">Subject Name *</label>
-                                        <input name="subject_name" type="text" class="form-control" value="{{$subject->subject_name}}"
-                                            aria-label="Name">
+                                        <input name="subject_name" type="text" class="form-control"
+                                            value="{{ $subject->subject_name }}" aria-label="Name">
                                     </div>
                                     <!-- Start -->
                                     <div class="col-md-6">
                                         <label class="form-label">Start *</label>
-                                        <input name="start_date" type="date" class="form-control"  value="{{Carbon\Carbon::parse($subject->start_date)->format('Y-m-d') }}">
+                                        <input name="start_date" type="date" class="form-control"
+                                            value="{{ Carbon\Carbon::parse($subject->start_date)->format('Y-m-d') }}">
                                     </div>
                                     <!-- End -->
                                     <div class="col-md-6">
                                         <label class="form-label">End *</label>
-                                        <input name="end_date" type="date" class="form-control" value="{{Carbon\Carbon::parse($subject->end_date)->format('Y-m-d') }}">
+                                        <input name="end_date" type="date" class="form-control"
+                                            value="{{ Carbon\Carbon::parse($subject->end_date)->format('Y-m-d') }}">
                                     </div>
                                 </div> <!-- Row END -->
                             </div>
