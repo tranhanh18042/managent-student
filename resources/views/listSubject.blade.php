@@ -84,7 +84,7 @@
                     @if ($user->role == 1)
                       <td>
                         <a href="{{ url('/subject-detail/' .$subject->id)}}" role="button" type="button" class="btn btn-light">Chi tiết</a>
-                        <a href="#" role="button" type="button" class="btn btn-info">Sửa</a>
+                        <a href="{{ url('/update-subject/' .$subject->id)}}" class="btn btn-info">Sửa</a>
                         <button type="submit" class="btn btn-danger">Xóa</button>
                       </td>
                     @endif
