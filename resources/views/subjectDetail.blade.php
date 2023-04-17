@@ -146,6 +146,10 @@
                         <th scope="col">Address</Address>
                         </th>
                         <th scope="col">Email</th>
+                        <th scope="col">Score Process</Address>
+                        </th>
+                        <th scope="col">Score Test</Address>
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -158,6 +162,17 @@
                                 <td>{{ $student->name }}</td>
                                 <td>{{ $student->address }}</td>
                                 <td>{{ $student->email }}</td>
+                                @foreach ($user_subject as $rs)
+                                    @if ($student->id == $rs->user_id)
+                                        <td>{{ $rs->score_process }}</td>
+                                        <td>{{ $rs->score_test }}</td>
+                                    @endif
+                                @endforeach
+
+                                <td>
+                                    <a href="{{ url('/score' . '/' . $student->id . '/' . $subject->id) }}"
+                                        class="btn btn-primary">Edit</a>
+                                </td>
                                 <td>
                                     <button type="submit" class="btn btn-danger">Xóa</button>
                                 </td>

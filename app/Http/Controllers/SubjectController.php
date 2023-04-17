@@ -9,7 +9,6 @@ use App\Models\UserSubject;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
 
 class SubjectController extends Controller
 {
@@ -26,8 +25,9 @@ class SubjectController extends Controller
         $subject = Subject::find($id);
         $user = User::find(Subject::find($id)->teacher_id);
         $student = $subject->user()->get();
+        $user_subject = UserSubject::where('subject_id', $subject->id)->get();
         $role_user_login = Auth::user()->role;
-        return view('subjectDetail', compact('subject', 'user', 'student', 'role_user_login'));
+        return view('subjectDetail', compact('subject', 'user', 'student', 'user_subject','role_user_login'));
     }
     public function updateSubject(Request $request, int $id)
     {
