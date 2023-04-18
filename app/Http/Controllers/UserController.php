@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -11,41 +12,53 @@ use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
-    public function getListUsers(){
+    public function getListUsers()
+    {
         $users = User::where('role', 0)->get();
         return view('listUsers', compact('users'));
     }
-    public function getUserByID(){
+    public function getUserByID()
+    {
         $userRes = Auth::user();
+        // dd($userRes);
         return view('profileUser', compact('userRes'));
     }
-    public function edit(){
+    public function edit()
+    {
         $user = Auth::user();
         return view('updateProfile', compact('user'));
     }
 
-    public function updateUser(Request $request){
+    public function updateUser(UserRequest $request)
+    {
         $user = Auth::user();
-        if($request->has('avatar')){
+        if ($request->has('avatar')) {
             $file = $request->file('avatar');
-            $name = time().'-'.$user->id.'-'.'avatar.'.$file->getClientOriginalExtension();
-            Storage::put($name,file_get_contents($file));
-            $input = $request->all(['avatar']);
-            $input['avatar'] = Storage::url($name);
-            dd($input['avatar']);
-            DB::table('users')
-                ->where('email', $user->email)
-                ->update($input);
-        }else{
-            $input = $request->all(['name', 'email','phone', 'address']);
-            DB::table('users')
-            ->where('email', $user->email)
-            ->update($input);
+            $name = time() . '-' . $user->id . '-' . 'avatar.' . $file->getClientOriginalExtension();
+            Storage::put($name, file_get_contents($file));
+            $url = Storage::url($name);
+            User::where('id', $user->id)
+                ->update([
+                    'name' => $request->name,
+                    'address' => $request->address,
+                    'phone' => $request->phone,
+                    'email' => $request->email,
+                    'avatar' => $url
+                ]);
+        } else {
+            User::where('id', $user->id)
+                ->update([
+                    'name' => $request->name,
+                    'address' => $request->address,
+                    'phone' => $request->phone,
+                    'email' => $request->email
+                ]);
         }
-  
+
         return redirect()->route('profile');
     }
-    public function createUser(Request $request){
+    public function createUser(Request $request)
+    {
         $user = User::create([
             'name' => $request->name,
             'address' => $request->address,
@@ -57,6 +70,5 @@ class UserController extends Controller
 
         ]);
         return $user;
-        
     }
 }
