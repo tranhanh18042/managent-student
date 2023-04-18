@@ -68,6 +68,9 @@
                     <div class="gap-3 d-md-flex justify-content-md-end text-center">
                         <button type="submit" class="btn btn-primary btn-lg">Register</button>
                     </div>
+                    <div class="gap-3 d-md-flex justify-content-md-end text-center">
+                        <a href="{{route('login')}}" class="btn btn-primary">Back</a>
+                    </div>
                 </form> <!-- Form END -->
             </div>
         </div>
