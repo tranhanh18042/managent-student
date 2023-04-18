@@ -29,6 +29,7 @@
       </div>
       <button type="submit" class="btn btn-primary">Login</button>
     </form>
+    <a href="{{route('register')}}" class="btn btn-primary" >Register</a>
 
     <!-- Optional JavaScript; choose one of the two! -->
 

@@ -56,18 +56,4 @@ class UserController extends Controller
 
         return redirect()->route('profile');
     }
-    public function createUser(Request $request)
-    {
-        $user = User::create([
-            'name' => $request->name,
-            'address' => $request->address,
-            'email' => $request->email,
-            'phone' => $request->phone,
-            'password' => Hash::make($request->password),
-            'avatar' => $request->avatar,
-            'role' => $request->role,
-
-        ]);
-        return $user;
-    }
 }
