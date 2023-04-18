@@ -20,7 +20,6 @@ class UserController extends Controller
     public function getUserByID()
     {
         $userRes = Auth::user();
-        // dd($userRes);
         return view('profileUser', compact('userRes'));
     }
     public function edit()

@@ -24,7 +24,7 @@ class LoginRequest extends FormRequest
     public function requestLogin()
     {
         return [
-            'email' => 'required',
+            'email' => 'required|email::filter',
             'password' => 'required',
         ];
     }

@@ -96,17 +96,12 @@
                                         <input name="subject_name" type="text" class="form-control" placeholder=""
                                             aria-label="Name">
                                     </div>
-                                    <!--Address -->
-                                    <div class="col-md-6">
-                                        <label class="form-label">Teacher ID *</label>
-                                        <input name="teacher_id" type="text" class="form-control" placeholder=""
-                                            aria-label="Address" value="{{ $user->id }}">
-                                    </div>
                                     <!-- Phone number -->
                                     <div class="col-md-6">
                                         <label class="form-label">Start *</label>
-                                        <input name="start_date" type="date" class="form-control" placeholder=""
-                                            aria-label="Phone number">
+                                        <input name="start_date" type="date" class="form-control" 
+                                            placeholder="" aria-label="Phone number"
+                                            value="{{ Carbon\Carbon::parse(now())->format('Y-m-d') }}">
                                     </div>
                                     <!-- Email -->
                                     <div class="col-md-6">
