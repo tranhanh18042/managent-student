@@ -51,7 +51,7 @@
                         <a class="nav-link" href="{{ route('change.password') }}">Change Password</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('login') }}">Logout</a>
+                        <a class="nav-link" href="{{ route('logout') }}">Logout</a>
                     </li>
                 </ul>
                 <!-- Left links -->
