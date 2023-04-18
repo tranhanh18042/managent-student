@@ -76,8 +76,8 @@
                 <div class="col-lg-4">
                     <div class="card mb-4">
                         <div class="card-body text-center">
-                            <img src="storage/app/1681296170-3-avatar.png" alt="avatar"
-                                class="rounded-circle img-fluid" style="width: 150px;">
+                            <img src="{{ asset($userRes->avatar) }}" alt="avatar" class="rounded-circle img-fluid"
+                                style="width: 150px; height: 150px;">
                             <h5 class="my-3">{{ $userRes->name }}</h5>
                         </div>
                     </div>
