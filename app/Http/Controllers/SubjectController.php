@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AddStudentRequest;
 use App\Http\Requests\SubjectRequest;
 use App\Models\Subject;
 use App\Models\User;
@@ -29,7 +30,7 @@ class SubjectController extends Controller
         $role_user_login = Auth::user()->role;
         return view('subjectDetail', compact('subject', 'user', 'student', 'user_subject','role_user_login'));
     }
-    public function updateSubject(Request $request, int $id)
+    public function updateSubject(SubjectRequest $request, int $id)
     {
         $subject = Subject::find($id);
         $subject->subject_name = $request->subject_name;
@@ -47,11 +48,12 @@ class SubjectController extends Controller
     public function createSubject(SubjectRequest $request)
     {
 
+        $teacher_id = Auth::user()->id;
         Subject::create([
             'subject_name' => $request->subject_name,
             'start_date' => $request->start_date,
             'end_date' => $request->end_date,
-            'teacher_id' => $request->teacher_id,
+            'teacher_id' => $teacher_id,
             'created_at' => Carbon::now(),
             'updated_at' => null,
         ]);
@@ -73,13 +75,14 @@ class SubjectController extends Controller
         }
         return redirect('subjects');
     }
-    public function addStudent(Request $request, int $id)
+    public function addStudent(AddStudentRequest $request, int $id)
     {
-        $request->validate([
-            'id' => 'required',
-        ]);
+        
         $user = User::find($request->id);
         $subject = Subject::find($id);
+        if($user == null) {
+            return redirect()->back();
+        }
         $user_subject = UserSubject::where('user_id', $user->id)
             ->where('subject_id', $subject->id)
             ->first();
