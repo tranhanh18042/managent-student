@@ -51,6 +51,11 @@
                                 <a class="nav-link" href="{{ route('listUsers') }}">Students</a>
                             </li>
                         @endif
+                        @if (Auth::user()->role == 0)
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('listUsers') }}">Result</a>
+                            </li>
+                        @endif
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('change.password') }}">Change Password</a>
                         </li>
