@@ -71,29 +71,37 @@
         </nav>
     </section>
 
-    @if ($user->role == 0)
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">My Subject</Address>
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($list_subject as $subject)
-                    @csrf
+    <section class="w-100 p-4 table-responsive" style="display: flex; justify-content: center;">
+        @if ($user->role == 0)
+            <table class="table  table-striped mb-0 bg-white" style="width: 80%; ">
+                <thead class="bg-light">
                     <tr>
-                        <td>{{ $subject->subject_name }}</td>
-                        <td>
-                            <a href="{{ url('/subject-detail/' . $subject->id) }}" role="button" type="button"
-                                class="btn btn-light">Chi tiết</a>
-                        </td>
+                        <th scope="col">Subject name</th>
+                        <th scope="col">Start date</th>
+                        <th scope="col">End date</th>
+                        <th scope="col">Actions</th>
                     </tr>
-                @endforeach
-        </table>
-        <a href="{{ route('subjects') }}" class="btn btn-primary">Back</a>
+                </thead>
+                <tbody>
+                    @foreach ($list_subject as $subject)
+                        @csrf
+                        <tr>
+                            <td>{{ $subject->subject_name }}</td>
+                            <td>{{ $subject->start_date }}</td>
+                            <td>{{ $subject->end_date }}</td>
 
-    @endif
+                            <td>
+                                <a href="{{ url('/subject-detail/' . $subject->id) }}" role="button" type="button"
+                                    class="btn btn-info">Chi tiết</a>
+                            </td>
+                        </tr>
+                    @endforeach
+            </table>
+        @endif
+    </section>
+    <div style="padding-left: 220px ">
+        <a href="{{ route('subjects') }}" class="btn btn-primary">Back</a>
+    </div>
 
     <!-- Optional JavaScript; choose one of the two! -->
 

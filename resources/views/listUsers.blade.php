@@ -69,28 +69,38 @@
         </div>
         <!-- Container wrapper -->
     </nav>
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Name</th>
-                <th scope="col">Address</Address>
-                </th>
-                <th scope="col">Email</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($users as $user)
+    <section class="w-100 p-4 table-responsive" style="display: flex; justify-content: center;">
+        <table class="table  table-striped mb-0 bg-white" style="width: 80%; ">
+            <thead class="bg-light">
                 <tr>
-                    <th scope="row">{{ $user->id }}</th>
-                    <td>{{ $user->name }}</td>
-                    <td>{{ $user->address }}</td>
-                    <td>{{ $user->email }}</td>
-                    {{-- <td>@mdo</td> --}}
+                    <th scope="col">ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Email</th>
                 </tr>
-            @endforeach
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach ($users as $user)
+                    <tr>
+                        <th scope="row">{{ $user->id }}</th>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <img src="{{ asset($user->avatar) }}" alt="" style="width: 45px; height: 45px"
+                                    class="rounded-circle" />
+                                <div class="ms-3">
+                                    <p class="fw-bold mb-1">{{ $user->name }}</p>
+                                    <p class="text-muted mb-0">{{ $user->email }}</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td>{{ $user->phone }}</td>
+                        <td>{{ $user->address }}</td>
+                        {{-- <td>@mdo</td> --}}
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </section>
 
     <!-- Optional JavaScript; choose one of the two! -->
 

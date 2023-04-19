@@ -48,6 +48,11 @@
                                 <a class="nav-link" href="{{ route('listUsers') }}">Students</a>
                             </li>
                         @endif
+                        @if (Auth::user()->role == 0)
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('listUsers') }}">Result</a>
+                            </li>
+                        @endif
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('change.password') }}">Change Password</a>
                         </li>
@@ -70,86 +75,72 @@
                 <!-- Container wrapper -->
         </nav>
     </section>
+
     <section style="background-color: #eee;">
-        <div class="container py-5">
+        <div class="container py-5" style="width: 80%; padding-top: 300px;">
             <div class="row">
+                <div class="col-lg-4">
+                    <div class="card mb-4">
+                        <div class="card-body text-center">
+                            <img src="{{asset($user->avatar)}}"
+                                alt="avatar" class="rounded-circle img-fluid" style="width: 140px;">
+                            <h5 class="my-3">{{$user->name}}</h5>
+                            <p class="text-muted mb-1">{{$user->email}}</p>
+                            <p class="text-muted mb-1">{{$user->phone}}</p>
+
+                        </div>
+                    </div>
+                </div>
                 <div class="col-lg-8">
                     <div class="card mb-4">
                         <div class="card-body">
+                            <div class="row" style="padding-bottom: 15px;">
+                                <span style="font-size: 30px; padding-bottom: 20px; text-align: center">Information Subject</span>
+                            </div>
                             <div class="row">
                                 <div class="col-sm-3">
                                     <p class="mb-0">Subject Name</p>
                                 </div>
                                 <div class="col-sm-9">
-                                    <p class="text-muted mb-0">{{ $subject->subject_name }}</p>
+                                    <p class="text-muted mb-0">{{$subject->subject_name}}</p>
                                 </div>
                             </div>
                             <hr>
                             <div class="row">
                                 <div class="col-sm-3">
-                                    <p class="mb-0">Email Teacher</p>
+                                    <p class="mb-0">End Date</p>
                                 </div>
                                 <div class="col-sm-9">
-                                    <p class="text-muted mb-0">{{ $user->email }}</p>
+                                    <p class="text-muted mb-0">{{$subject->start_date}}</p>
                                 </div>
                             </div>
                             <hr>
                             <div class="row">
                                 <div class="col-sm-3">
-                                    <p class="mb-0">Phone Teacher</p>
+                                    <p class="mb-0">Start Date</p>
                                 </div>
                                 <div class="col-sm-9">
-                                    <p class="text-muted mb-0">{{ $user->phone }}</p>
+                                    <p class="text-muted mb-0">{{$subject->end_date}}</p>
                                 </div>
                             </div>
                             <hr>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <p class="mb-0">Sart Date</p>
-                                </div>
-                                <div class="col-sm-9">
-                                    <p class="text-muted mb-0">{{ $subject->start_date }}</p>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <p class="mb-0">End date</p>
-                                </div>
-                                <div class="col-sm-9">
-                                    <p class="text-muted mb-0">{{ $subject->end_date }}</p>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <section>
+
+    <section class="w-100 p-4 table-responsive" style="display: flex; justify-content: center; background-color: #eee;">
         @if ($role_user_login == 1)
-            <form action="{{ url('/add-student' . '/' . $subject->id) }}" method="POST">
-                @csrf
-                @method('POST')
-                <label class="form-label">ID *</label>
-                <input name="id" type="number" value="">
-                <button type="submit" class="btn btn-success">Add Student</button>
-            </form>
-        @endif
-    </section>
-    <section>
-        @if ($role_user_login == 1)
-            <table class="table">
-                <thead>
+            <table class="table  table-striped mb-0 bg-white" style="width: 69%; ">
+                <thead class="bg-light">
                     <tr>
                         <th scope="col">Name</th>
-                        <th scope="col">Address</Address>
-                        </th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Score Process</Address>
-                        </th>
-                        <th scope="col">Score Test</Address>
-                        </th>
+                        <th scope="col">Address</th>
+                        <th scope="col">Score Process</th>
+                        <th scope="col">Score Test</th>
+                        <th scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -159,9 +150,17 @@
                             @csrf
                             @method('DELETE')
                             <tr>
-                                <td>{{ $student->name }}</td>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <img src="{{ asset($student->avatar) }}" alt=""
+                                            style="width: 45px; height: 45px" class="rounded-circle" />
+                                        <div class="ms-3">
+                                            <p class="fw-bold mb-1">{{ $student->name }}</p>
+                                            <p class="text-muted mb-0">{{ $student->email }}</p>
+                                        </div>
+                                    </div>
+                                </td>
                                 <td>{{ $student->address }}</td>
-                                <td>{{ $student->email }}</td>
                                 @foreach ($user_subject as $rs)
                                     @if ($student->id == $rs->user_id)
                                         <td>{{ $rs->score_process }}</td>
@@ -172,9 +171,8 @@
                                 <td>
                                     <a href="{{ url('/score' . '/' . $student->id . '/' . $subject->id) }}"
                                         class="btn btn-primary">Edit</a>
-                                </td>
-                                <td>
                                     <button type="submit" class="btn btn-danger">Xóa</button>
+
                                 </td>
                             </tr>
                         </form>
@@ -183,7 +181,7 @@
             </table>
         @endif
     </section>
-    <a class="btn btn-primary" href="{{ route('subjects') }}">Back</a>
+    {{-- <a class="btn btn-primary" href="{{ route('subjects') }}">Back</a> --}}
 
 
     <!-- Optional JavaScript; choose one of the two! -->
