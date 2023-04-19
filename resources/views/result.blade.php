@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
@@ -9,14 +9,11 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css"
-        integrity="sha256-2XFplPlrFClt0bIdPgpz8H7ojnk10H69xRqd9+uTShA=" crossorigin="anonymous" />
 
     <title>Hello, world!</title>
 </head>
 
 <body>
-
     <section>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <!-- Container wrapper -->
@@ -78,48 +75,49 @@
                 <!-- Container wrapper -->
         </nav>
     </section>
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <!-- Page title -->
-                <div class="my-5">
-                    <h3>Score</h3>
-                    <hr>
-                </div>
-                <!-- Form START -->
-                <form action="" method="POST">
-                    @csrf
-                    @method('PUT')
-                    <div class="row mb-5 gx-5">
-                        <!-- Contact detail -->
-                        <div class="col-xxl-8 mb-5 mb-xxl-0">
-                            <div class="bg-secondary-soft px-4 py-5 rounded">
-                                <div class="row g-3">
-                                    <div class="col-md-6">
-                                        <label class="form-label">Name : {{$user->name}}</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label class="form-label">Subject : {{$subject->subject_name}}</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label class="form-label">Score Process </label>
-                                        <input name="score_process" type="number" class="form-control" value="">
-                                    </div>
-                                    <!-- Start -->
-                                    <div class="col-md-6">
-                                        <label class="form-label">Score Test *</label>
-                                        <input name="score_test" type="number" class="form-control" value="">
-                                    </div>
-                                </div> <!-- Row END -->
-                            </div>
-                        </div>
-                    </div> <!-- Row END -->
-                    <!-- button -->
-                    <div class="gap-3 d-md-flex justify-content-md-end text-center">
-                        <button type="submit" class="btn btn-primary btn-lg">Update</button>
-                    </div>
-                </form> <!-- Form END -->
-            </div>
-        </div>
-    </div>
+    <section class="w-100 p-4 table-responsive" style="display: flex; justify-content: center; background-color: #eee;">
+        <table class="table  table-striped mb-0 bg-white" style="width: 69%; ">
+            <thead class="bg-light">
+                <tr>
+                    <th scope="col">Subject Name</th>
+                    <th scope="col">Score Process</th>
+                    <th scope="col">Score Test</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($subject as $subject)
+                    <tr>
+                        <td>{{ $subject->subject_name }}</td>
+                        @foreach ($user_subject as $rs)
+                            @if ($subject->id == $rs->subject_id)
+                                <td>{{ $rs->score_process }}</td>
+                                <td>{{ $rs->score_test }}</td>
+                            @endif
+                        @endforeach
+
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </section>
+
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    </script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
+    </script>
+    -->
 </body>
+
+</html>
