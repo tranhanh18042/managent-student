@@ -50,7 +50,7 @@
                         @endif
                         @if (Auth::user()->role == 0)
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('listUsers') }}">Result</a>
+                                <a class="nav-link" href="{{ route('') }}">Result</a>
                             </li>
                         @endif
                         <li class="nav-item">
@@ -77,16 +77,23 @@
     </section>
 
     <section style="background-color: #eee;">
+        <div style="padding-left: 16.5%">
+            <a class="btn btn-primary" href="{{ route('subjects') }}"> <--- Back</a>
+
+        </div>
+    </section>
+
+    <section style="background-color: #eee;">
         <div class="container py-5" style="width: 80%; padding-top: 300px;">
             <div class="row">
                 <div class="col-lg-4">
                     <div class="card mb-4">
                         <div class="card-body text-center">
-                            <img src="{{asset($user->avatar)}}"
-                                alt="avatar" class="rounded-circle img-fluid" style="width: 140px;">
-                            <h5 class="my-3">{{$user->name}}</h5>
-                            <p class="text-muted mb-1">{{$user->email}}</p>
-                            <p class="text-muted mb-1">{{$user->phone}}</p>
+                            <img src="{{ asset($user->avatar) }}" alt="avatar" class="rounded-circle img-fluid"
+                                style="width: 140px;">
+                            <h5 class="my-3">{{ $user->name }}</h5>
+                            <p class="text-muted mb-1">{{ $user->email }}</p>
+                            <p class="text-muted mb-1">{{ $user->phone }}</p>
 
                         </div>
                     </div>
@@ -95,14 +102,15 @@
                     <div class="card mb-4">
                         <div class="card-body">
                             <div class="row" style="padding-bottom: 15px;">
-                                <span style="font-size: 30px; padding-bottom: 20px; text-align: center">Information Subject</span>
+                                <span style="font-size: 30px; padding-bottom: 20px; text-align: center">Information
+                                    Subject</span>
                             </div>
                             <div class="row">
                                 <div class="col-sm-3">
                                     <p class="mb-0">Subject Name</p>
                                 </div>
                                 <div class="col-sm-9">
-                                    <p class="text-muted mb-0">{{$subject->subject_name}}</p>
+                                    <p class="text-muted mb-0">{{ $subject->subject_name }}</p>
                                 </div>
                             </div>
                             <hr>
@@ -111,7 +119,7 @@
                                     <p class="mb-0">End Date</p>
                                 </div>
                                 <div class="col-sm-9">
-                                    <p class="text-muted mb-0">{{$subject->start_date}}</p>
+                                    <p class="text-muted mb-0">{{ $subject->start_date }}</p>
                                 </div>
                             </div>
                             <hr>
@@ -120,7 +128,7 @@
                                     <p class="mb-0">Start Date</p>
                                 </div>
                                 <div class="col-sm-9">
-                                    <p class="text-muted mb-0">{{$subject->end_date}}</p>
+                                    <p class="text-muted mb-0">{{ $subject->end_date }}</p>
                                 </div>
                             </div>
                             <hr>
@@ -131,6 +139,19 @@
         </div>
     </section>
 
+    <section style="background-color: #eee;">
+        <div style="padding-left: 16.5%">
+            @if ($role_user_login == 1)
+                <form action="{{ url('/add-student' . '/' . $subject->id) }}" method="POST">
+                    @csrf
+                    @method('POST')
+                    <label class="form-label">ID *</label>
+                    <input name="id" type="number" value="">
+                    <button type="submit" class="btn btn-success">Add Student</button>
+                </form>
+            @endif
+        </div>
+    </section>
     <section class="w-100 p-4 table-responsive" style="display: flex; justify-content: center; background-color: #eee;">
         @if ($role_user_login == 1)
             <table class="table  table-striped mb-0 bg-white" style="width: 69%; ">
@@ -181,7 +202,6 @@
             </table>
         @endif
     </section>
-    {{-- <a class="btn btn-primary" href="{{ route('subjects') }}">Back</a> --}}
 
 
     <!-- Optional JavaScript; choose one of the two! -->

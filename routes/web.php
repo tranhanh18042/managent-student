@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\ResultController;
 use App\Http\Controllers\ScoreController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\UserController;
@@ -52,6 +53,7 @@ Route::middleware(['login'])->group(function () {
     });
 
     Route::middleware(['roleStudent'])->group(function () {
+        Route::get('/result', [ResultController::class, 'showResult'])->name('result');
         Route::post('/join-subject/{id}', [SubjectController::class, 'joinSubject']);
         Route::get('/list-subject-student', [SubjectController::class, 'showListSubjectStudent'])->name('list.subject.student');
     });
