@@ -70,54 +70,42 @@
                 <!-- Container wrapper -->
         </nav>
     </section>
-    <section style="background-color: #eee;">
+    
+    <section class="vh-100" style="background-color: #f4f5f7;">
         <div class="container py-5">
-            <div class="row">
-                <div class="col-lg-4">
-                    <div class="card mb-4">
-                        <div class="card-body text-center">
-                            <img src="{{ asset($userRes->avatar) }}" alt="avatar" class="rounded-circle img-fluid"
-                                style="width: 150px; height: 150px;">
-                            <h5 class="my-3">{{ $userRes->name }}</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-8">
-                    <div class="card mb-4">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <p class="mb-0">Full Name</p>
-                                </div>
-                                <div class="col-sm-9">
-                                    <p class="text-muted mb-0">{{ $userRes->name }}</p>
-                                </div>
+            <div class="row d-flex justify-content-center align-items-center ">
+                <div class="col col-lg-6 mb-4 mb-lg-0" style="width: 80%;">
+                    <div class="card mb-3" style="border-radius: .5rem;">
+                        <div class="row g-0">
+                            <div class="col-md-4 gradient-custom text-center text-white"
+                                style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem; background: #04AA6D">
+                                <img src="{{ asset($userRes->avatar) }}"
+                                    alt="Avatar" class="img-fluid my-5" style="width: 150px; border-radius: 50%;" />
+                                <h5>{{$userRes->name}}</h5>
+                                <p>Web Designer</p>
+                                <i class="far fa-edit mb-5"></i>
                             </div>
-                            <hr>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <p class="mb-0">Email</p>
-                                </div>
-                                <div class="col-sm-9">
-                                    <p class="text-muted mb-0">{{ $userRes->email }}</p>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <p class="mb-0">Phone</p>
-                                </div>
-                                <div class="col-sm-9">
-                                    <p class="text-muted mb-0">{{ $userRes->phone }}</p>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <p class="mb-0">Address</p>
-                                </div>
-                                <div class="col-sm-9">
-                                    <p class="text-muted mb-0">{{ $userRes->address }}</p>
+                            <div class="col-md-8">
+                                <div class="card-body p-4">
+                                    <h6>Information</h6>
+                                    <hr class="mt-0 mb-4">
+                                    <div class="row pt-1">
+                                        <div class="col-6 mb-3">
+                                            <h6>Email</h6>
+                                            <p class="text-muted">{{$userRes->email}}</p>
+                                        </div>
+                                        <div class="col-6 mb-3">
+                                            <h6>Phone</h6>
+                                            <p class="text-muted">{{$userRes->phone}}</p>
+                                        </div>
+                                        <div class="col-6 mb-3">
+                                            <h6>Address</h6>
+                                            <p class="text-muted">{{$userRes->address}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-end">
+                                        <a class="btn btn-primary" href="{{ route('editProfile') }}" role="button">Update</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -126,7 +114,6 @@
             </div>
         </div>
     </section>
-    <a class="btn btn-primary" href="{{ route('editProfile') }}" role="button">Update</a>
 
     <!-- Optional JavaScript; choose one of the two! -->
 

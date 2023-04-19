@@ -71,7 +71,11 @@
         <!-- Container wrapper -->
     </nav>
     <section>
-        <h1>Best Home page</h1>
+        <div
+            style="width: 100%; height: 100vh; background: rgb(2,19,255);
+            background: linear-gradient(90deg, rgba(2,19,255,1) 0%, rgba(60,113,161,1) 40%, rgba(40,170,182,1) 100%); display: flex; justify-content: center; align-items: center">
+            <span style="font-size: 100px">Welcome</span>
+        </div>
     </section>
     <!-- Navbar -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"

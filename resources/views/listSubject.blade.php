@@ -70,61 +70,80 @@
                 <!-- Container wrapper -->
         </nav>
     </section>
-    @if ($user->role == 1)
-        <a href="{{ url('/subject') }}" class="btn btn-success">Thêm</a>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">Subject Name</Address>
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($list_subject_teacher as $subject)
-                    <form action="{{ url('/delete-subject/' . $subject->id) }}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <tr>
-                            <td>{{ $subject->subject_name }}</td>
-                            @if ($user->role == 1)
-                                <td>
-                                    <a href="{{ url('/subject-detail/' . $subject->id) }}" role="button" type="button"
-                                        class="btn btn-light">Chi tiết</a>
-                                    <a href="{{ url('/update-subject/' . $subject->id) }}" class="btn btn-info">Sửa</a>
-                                    <button type="submit" class="btn btn-danger">Xóa</button>
-                                </td>
-                            @endif
-                        </tr>
-                    </form>
-                @endforeach
-        </table>
-    @endif
-    @if ($user->role == 0)
-        <table class="table">
+    <div style="padding-left: 200px;">
+        @if ($user->role == 1)
+            <a href="{{ url('/subject') }}" class="btn btn-success">Thêm</a>
+        @endif
+        @if ($user->role == 0)
             <a href="{{ route('list.subject.student') }}" class="btn btn-success">My Subject</a>
-            <thead>
-                <tr>
-                    <th scope="col">New Subject</Address>
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($list_subject as $subject)
-                    <form action="{{ url('/join-subject/' . $subject->id) }}" method="POST">
-                        @csrf
-                        @method('POST')
-                        <tr>
-                            <td>{{ $subject->subject_name }}</td>
-                            <td>
-                                <a href="{{ url('/subject-detail/' . $subject->id) }}" role="button" type="button"
-                                    class="btn btn-light">Chi tiết</a>
-                                <button type="submit" class="btn btn-info">Tham gia</button>
-                            </td>
-                        </tr>
-                    </form>
-                @endforeach
-        </table>
-    @endif
+        @endif
+    </div>
+    <section class="w-100 p-4 table-responsive" style="display: flex; justify-content: center;">
+        @if ($user->role == 1)
+            <table class="table  table-striped mb-0 bg-white" style="width: 80%; ">
+                <thead class="bg-light">
+                    <tr>
+                        <th scope="col">Subject name</th>
+                        <th scope="col">Start date</th>
+                        <th scope="col">End date</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($list_subject_teacher as $subject)
+                        <form action="{{ url('/delete-subject/' . $subject->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <tr>
+                                <td>{{ $subject->subject_name }}</td>
+                                <td>{{ $subject->start_date }}</td>
+                                <td>{{ $subject->end_date }}</td>
+
+                                @if ($user->role == 1)
+                                    <td>
+                                        <a href="{{ url('/subject-detail/' . $subject->id) }}" role="button"
+                                            type="button" class="btn btn-light">Chi tiết</a>
+                                        <a href="{{ url('/update-subject/' . $subject->id) }}"
+                                            class="btn btn-info">Sửa</a>
+                                        <button type="submit" class="btn btn-danger">Xóa</button>
+                                    </td>
+                                @endif
+                            </tr>
+                        </form>
+                    @endforeach
+            </table>
+        @endif
+        @if ($user->role == 0)
+            <table class="table  table-striped mb-0 bg-white" style="width: 80%;">
+                <thead class="bg-light">
+                    <tr>
+                        <th scope="col">Subject name</th>
+                        <th scope="col">Start date</th>
+                        <th scope="col">End date</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($list_subject as $subject)
+                        <form action="{{ url('/join-subject/' . $subject->id) }}" method="POST">
+                            @csrf
+                            @method('POST')
+                            <tr>
+                                <td>{{ $subject->subject_name }}</td>
+                                <td>{{ $subject->start_date }}</td>
+                                <td>{{ $subject->end_date }}</td>
+                                <td>
+                                    <a href="{{ url('/subject-detail/' . $subject->id) }}" role="button"
+                                        type="button" class="btn btn-light">Chi tiết</a>
+                                    <button type="submit" class="btn btn-info">Tham gia</button>
+                                </td>
+                            </tr>
+                        </form>
+                    @endforeach
+            </table>
+        @endif
+    </section>
+
 
     <!-- Optional JavaScript; choose one of the two! -->
 
