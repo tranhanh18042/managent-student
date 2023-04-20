@@ -8,6 +8,7 @@ use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ResultController;
 use App\Http\Controllers\ScoreController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\UserController;
 
@@ -29,6 +30,7 @@ Route::get('/login', [LoginController::class, 'showloginErr'])->name('login');
 Route::post('/login-custom', [LoginController::class, 'login'])->name('login.custom');
 
 Route::middleware(['login'])->group(function () {
+    Route::get('/search', [SearchController::class, 'search'])->name('search');
     Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::get('/user', [UserController::class, 'getUserById'])->name('profile');
     Route::get('/logout', [LogoutController::class, 'logout'])->name('logout');

@@ -60,7 +60,7 @@
                         <a class="nav-link" href="{{ route('logout') }}">Logout</a>
                     </li>
                     <li class="nav-item">
-                        <form action="{{route('search')}}" method="GET">
+                        <form method="GET">
                             @csrf
                             <div class="input-group">
                                 <div class="form-outline">
@@ -90,13 +90,63 @@
         </div>
         <!-- Container wrapper -->
     </nav>
-    <section>
-        <div
-            style="width: 100%; height: 100vh; background: rgb(2,19,255);
-            background: linear-gradient(90deg, rgba(2,19,255,1) 0%, rgba(60,113,161,1) 40%, rgba(40,170,182,1) 100%); display: flex; justify-content: center; align-items: center">
-            <span style="font-size: 100px">Welcome</span>
-        </div>
+
+    <section class="w-100 p-4 table-responsive" style="display: flex; justify-content: center;">
+        @if ($user->role == 1)
+            <table class="table  table-striped mb-0 bg-white" style="width: 80%; ">
+                <thead class="bg-light">
+                    <tr>
+                        <th scope="col">Subject name</th>
+                        <th scope="col">Start date</th>
+                        <th scope="col">End date</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($search as $subject)
+                        <tr>
+                            <td>{{ $subject->subject_name }}</td>
+                            <td>{{ $subject->start_date }}</td>
+                            <td>{{ $subject->end_date }}</td>
+
+                            <td>
+                                <a href="{{ url('/subject-detail/' . $subject->id) }}" role="button" type="button"
+                                    class="btn btn-light">Chi tiết</a>
+                                @if ($user->role == $subject->teacher_id)
+                                    <a href="{{ url('/update-subject/' . $subject->id) }}" class="btn btn-info">Sửa</a>
+                                @endif
+
+                            </td>
+                        </tr>
+                    @endforeach
+            </table>
+        @endif
+        @if ($user->role == 0)
+            <table class="table  table-striped mb-0 bg-white" style="width: 80%;">
+                <thead class="bg-light">
+                    <tr>
+                        <th scope="col">Subject name</th>
+                        <th scope="col">Start date</th>
+                        <th scope="col">End date</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($search as $subject)
+                        <tr>
+                            <td>{{ $subject->subject_name }}</td>
+                            <td>{{ $subject->start_date }}</td>
+                            <td>{{ $subject->end_date }}</td>
+                            <td>
+                                <a href="{{ url('/subject-detail/' . $subject->id) }}" role="button" type="button"
+                                    class="btn btn-light">Chi tiết</a>
+                            </td>
+                        </tr>
+                    @endforeach
+            </table>
+        @endif
     </section>
+
     <!-- Navbar -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
