@@ -111,7 +111,7 @@
 
                             <td>
                                 <a href="{{ url('/subject-detail/' . $subject->id) }}" role="button" type="button"
-                                    class="btn btn-light">Chi tiết</a>
+                                    class="btn btn-primary">Chi tiết</a>
                                 @if ($user->role == $subject->teacher_id)
                                     <a href="{{ url('/update-subject/' . $subject->id) }}" class="btn btn-info">Sửa</a>
                                 @endif
@@ -139,7 +139,7 @@
                             <td>{{ $subject->end_date }}</td>
                             <td>
                                 <a href="{{ url('/subject-detail/' . $subject->id) }}" role="button" type="button"
-                                    class="btn btn-light">Chi tiết</a>
+                                    class="btn btn-primary">Chi tiết</a>
                             </td>
                         </tr>
                     @endforeach
