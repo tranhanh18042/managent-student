@@ -58,6 +58,20 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('logout') }}">Logout</a>
                     </li>
+                    <li class="nav-item">
+                        <form action="{{route('search')}}" method="GET">
+                            @csrf
+                            <div class="input-group">
+                                <div class="form-outline">
+                                    <input id="search-focus" name="search" type="search" placeholder="Search"
+                                        aria-label="Search" id="form1" class="form-control" />
+                                </div>
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-search fa-lg me-3 fa-fw"></i>
+                                </button>
+                            </div>
+                        </form>
+                    </li>
                 </ul>
                 <!-- Left links -->
             </div>
