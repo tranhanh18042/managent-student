@@ -24,7 +24,7 @@ class SubjectController extends Controller
     public function subjectDetail(int $id)
     {
         $subject = Subject::find($id);
-        $user = User::find(Subject::find($id)->teacher_id);
+        $user = Auth::user();
         $student = $subject->user()->get();
         $user_subject = UserSubject::where('subject_id', $subject->id)->get();
         $role_user_login = Auth::user()->role;
