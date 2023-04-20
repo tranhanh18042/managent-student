@@ -60,7 +60,7 @@
                             <a class="nav-link" href="{{ route('logout') }}">Logout</a>
                         </li>
                         <li class="nav-item">
-                            <form action="{{route('search')}}" method="GET">
+                            <form action="{{ route('search') }}" method="GET">
                                 @csrf
                                 <div class="input-group">
                                     <div class="form-outline">
@@ -92,7 +92,8 @@
 
     <section style="background-color: #eee;">
         <div style="padding-left: 16.5%">
-            <a class="btn btn-primary" href="{{ route('subjects') }}"> <--- Back</a>
+            <a class="btn btn-primary" href="{{ route('subjects') }}">
+                <--- Back</a>
 
         </div>
     </section>
@@ -153,9 +154,9 @@
         </div>
     </section>
 
-    <section style="background-color: #eee;">
-        <div style="padding-left: 16.5%">
-            @if ($role_user_login == 1)
+    @if ($role_user_login == 1 && $user->id == $subject->teacher_id)
+        <section style="background-color: #eee;">
+            <div style="padding-left: 16.5%">
                 <form action="{{ url('/add-student' . '/' . $subject->id) }}" method="POST">
                     @csrf
                     @method('POST')
@@ -163,11 +164,13 @@
                     <input name="id" type="number" value="">
                     <button type="submit" class="btn btn-success">Add Student</button>
                 </form>
-            @endif
-        </div>
-    </section>
-    <section class="w-100 p-4 table-responsive" style="display: flex; justify-content: center; background-color: #eee;">
-        @if ($role_user_login == 1)
+            </div>
+        </section>
+    @endif
+
+    @if ($role_user_login == 1 && $user->id == $subject->teacher_id)
+        <section class="w-100 p-4 table-responsive"
+            style="display: flex; justify-content: center; background-color: #eee;">
             <table class="table  table-striped mb-0 bg-white" style="width: 69%; ">
                 <thead class="bg-light">
                     <tr>
@@ -214,8 +217,8 @@
                     @endforeach
                 </tbody>
             </table>
-        @endif
-    </section>
+        </section>
+    @endif
 
 
     <!-- Optional JavaScript; choose one of the two! -->

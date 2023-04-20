@@ -112,7 +112,7 @@
                             <td>
                                 <a href="{{ url('/subject-detail/' . $subject->id) }}" role="button" type="button"
                                     class="btn btn-primary">Chi tiết</a>
-                                @if ($user->role == $subject->teacher_id)
+                                @if ($user->id == $subject->teacher_id)
                                     <a href="{{ url('/update-subject/' . $subject->id) }}" class="btn btn-info">Sửa</a>
                                 @endif
 
