@@ -10,17 +10,17 @@ use Illuminate\Http\Request;
 
 class ScoreController extends Controller
 {
-    public function index(int $user_id, int $subject_id)
+    public function index(int $userId, int $subjectId)
     {
-        $user = User::find($user_id);
-        $subject = Subject::find($subject_id);
+        $user = User::find($userId);
+        $subject = Subject::find($subjectId);
         return view('insertScore', compact('user', 'subject'));
     }
-    public function storeScore(int $user_id, int $subject_id, ScoreRequest $request)
+    public function storeScore(int $userId, int $subjectId, ScoreRequest $request)
     {
-        UserSubject::where('user_id', $user_id)
-            ->where('subject_id', $subject_id)
+        UserSubject::where('user_id', $userId)
+            ->where('subject_id', $subjectId)
             ->update(['score_process' => $request->score_process, 'score_test' => $request->score_test]);    
-        return redirect()->route('subject.detail',['id' => $subject_id]);
+        return redirect()->route('subject.detail',['id' => $subjectId]);
     }
 }

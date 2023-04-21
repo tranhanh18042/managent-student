@@ -16,19 +16,19 @@ class SubjectController extends Controller
     public function getListSubject()
     {
         $user = User::find(Auth::user()->id);
-        $subject_applies = $user->subject()->pluck('subject_id');
-        $list_subject_teacher = Subject::where('teacher_id', $user->id)->get();
-        $list_subject = Subject::whereNotIn('id', $subject_applies)->get();
-        return view('listSubject', compact('list_subject', 'user', 'list_subject_teacher'));
+        $subjectApplies = $user->subject()->pluck('subject_id');
+        $listSubjectTeacher = Subject::where('teacher_id', $user->id)->get();
+        $listSubject = Subject::whereNotIn('id', $subjectApplies)->get();
+        return view('listSubject', compact('listSubject', 'user', 'listSubjectTeacher'));
     }
     public function subjectDetail(int $id)
     {
         $subject = Subject::find($id);
         $user = Auth::user();
         $student = $subject->user()->get();
-        $user_subject = UserSubject::where('subject_id', $subject->id)->get();
-        $role_user_login = Auth::user()->role;
-        return view('subjectDetail', compact('subject', 'user', 'student', 'user_subject','role_user_login'));
+        $userSubject = UserSubject::where('subject_id', $subject->id)->get();
+        $roleUserLogin = Auth::user()->role;
+        return view('subjectDetail', compact('subject', 'user', 'student', 'userSubject','roleUserLogin'));
     }
     public function updateSubject(SubjectRequest $request, int $id)
     {
@@ -48,12 +48,12 @@ class SubjectController extends Controller
     public function createSubject(SubjectRequest $request)
     {
 
-        $teacher_id = Auth::user()->id;
+        $teacherId = Auth::user()->id;
         Subject::create([
             'subject_name' => $request->subject_name,
             'start_date' => $request->start_date,
             'end_date' => $request->end_date,
-            'teacher_id' => $teacher_id,
+            'teacher_id' => $teacherId,
             'created_at' => Carbon::now(),
             'updated_at' => null,
         ]);
@@ -69,8 +69,8 @@ class SubjectController extends Controller
     {
         $subject = Subject::find($id);
         $user = $subject->user()->pluck('user_id');
-        $count_user = count($user);
-        if ($count_user == 0) {
+        $countUser = count($user);
+        if ($countUser == 0) {
             $subject->delete();
         }
         return redirect('subjects');
@@ -83,19 +83,19 @@ class SubjectController extends Controller
         if($user == null) {
             return redirect()->back();
         }
-        $user_subject = UserSubject::where('user_id', $user->id)
+        $userSubject = UserSubject::where('user_id', $user->id)
             ->where('subject_id', $subject->id)
             ->first();
-        if ($user != null && $user->role == 0 && $user_subject == null) {
+        if ($user != null && $user->role == 0 && $userSubject == null) {
             $subject->user()->attach($user->id);
         }
         return redirect()->back();
     }
-    public function removeStudent(int $user_id, int $subject_id)
+    public function removeStudent(int $userId, int $subjectId)
     {
-        $subject = Subject::find($subject_id);
+        $subject = Subject::find($subjectId);
         if (Auth::user()->role == 1) {
-            $subject->user()->detach($user_id);
+            $subject->user()->detach($userId);
         }
         return redirect()->back();
     }
@@ -111,7 +111,7 @@ class SubjectController extends Controller
     public function showListSubjectStudent()
     {
         $user = User::find(Auth::user()->id);
-        $list_subject = $user->subject()->get();
-        return view('listSubjectStudent', compact('list_subject','user'));
+        $listSubject = $user->subject()->get();
+        return view('listSubjectStudent', compact('listSubject','user'));
     }
 }

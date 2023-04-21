@@ -109,7 +109,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($list_subject_teacher as $subject)
+                    @foreach ($listSubjectTeacher as $subject)
                         <form action="{{ url('/delete-subject/' . $subject->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
@@ -143,7 +143,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($list_subject as $subject)
+                    @foreach ($listSubject as $subject)
                         <form action="{{ url('/join-subject/' . $subject->id) }}" method="POST">
                             @csrf
                             @method('POST')

@@ -12,7 +12,7 @@ class ResultController extends Controller
     {
         $user = User::find(Auth::user()->id);
         $subject = $user->subject()->get();
-        $user_subject = UserSubject::where('user_id', $user->id)->get();
-        return view('result',compact('user_subject', 'subject'));
+        $userSubject = UserSubject::where('user_id', $user->id)->get();
+        return view('result',compact('userSubject', 'subject'));
     }
 }

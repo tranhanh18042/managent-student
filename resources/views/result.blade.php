@@ -102,7 +102,7 @@
                 @foreach ($subject as $subject)
                     <tr>
                         <td>{{ $subject->subject_name }}</td>
-                        @foreach ($user_subject as $rs)
+                        @foreach ($userSubject as $rs)
                             @if ($subject->id == $rs->subject_id)
                                 <td>{{ $rs->score_process }}</td>
                                 <td>{{ $rs->score_test }}</td>
