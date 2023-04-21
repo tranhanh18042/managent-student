@@ -28,7 +28,7 @@ class SubjectController extends Controller
         $student = $subject->user()->get();
         $userSubject = UserSubject::where('subject_id', $subject->id)->get();
         $roleUserLogin = Auth::user()->role;
-        return view('subjectDetail', compact('subject', 'user', 'student', 'userSubject','roleUserLogin'));
+        return view('subjectDetail', compact('subject', 'user', 'student', 'userSubject', 'roleUserLogin'));
     }
     public function updateSubject(SubjectRequest $request, int $id)
     {
@@ -77,10 +77,10 @@ class SubjectController extends Controller
     }
     public function addStudent(AddStudentRequest $request, int $id)
     {
-        
+
         $user = User::find($request->id);
         $subject = Subject::find($id);
-        if($user == null) {
+        if ($user == null) {
             return redirect()->back();
         }
         $userSubject = UserSubject::where('user_id', $user->id)
@@ -112,6 +112,6 @@ class SubjectController extends Controller
     {
         $user = User::find(Auth::user()->id);
         $listSubject = $user->subject()->get();
-        return view('listSubjectStudent', compact('listSubject','user'));
+        return view('listSubjectStudent', compact('listSubject', 'user'));
     }
 }

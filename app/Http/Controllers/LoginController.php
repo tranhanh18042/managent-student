@@ -11,10 +11,12 @@ use Illuminate\Support\Facades\Session;
 
 class LoginController extends Controller
 {
-    public function showloginErr(){
+    public function showloginErr()
+    {
         return view('login');
     }
-    public function login(LoginRequest $request){
+    public function login(LoginRequest $request)
+    {
 
         $user = User::whereEmail($request->email)->first();
         $checkPass = Hash::check($request->password, $user->password);
@@ -22,8 +24,8 @@ class LoginController extends Controller
             Auth::login($user);
             return redirect()->route('home');
         }
-        
-        Session::flash('error','Sai mat khau hoac tai khoan');
+
+        Session::flash('error', 'Sai mat khau hoac tai khoan');
         return redirect()->back();
     }
 }

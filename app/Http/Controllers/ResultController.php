@@ -13,6 +13,6 @@ class ResultController extends Controller
         $user = User::find(Auth::user()->id);
         $subject = $user->subject()->get();
         $userSubject = UserSubject::where('user_id', $user->id)->get();
-        return view('result',compact('userSubject', 'subject'));
+        return view('result', compact('userSubject', 'subject'));
     }
 }

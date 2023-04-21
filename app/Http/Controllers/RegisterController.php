@@ -8,10 +8,12 @@ use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         return view('register');
     }
-    public function storeRegister(RegisterRequest $request){
+    public function storeRegister(RegisterRequest $request)
+    {
         User::create([
             'name' => $request->name,
             'address' => $request->address,
