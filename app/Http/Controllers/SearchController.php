@@ -8,6 +8,12 @@ use Illuminate\Support\Facades\Auth;
 
 class SearchController extends Controller
 {
+    
+    /**
+     * @Handle an incoming request show list results search
+     * @param  \Illuminate\Http\Request  $request
+     * @return view('showResultSearch')
+     */
     public function search(Request $request)
     {
         $user = Auth::user();

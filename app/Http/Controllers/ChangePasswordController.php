@@ -4,18 +4,27 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ChangePassword;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
 class ChangePasswordController extends Controller
 {
+    /**
+     * @Handle an incoming request show page 
+     * @return view changePassword
+     */
     public function index()
     {
         return view('changePassword');
     }
+
+    /**
+     * @Handle an incoming request Change password
+     * @param  \Illuminate\Requests\ChangePassword  $request
+     * @return redirect->route('login) 
+     * @throws redirect;
+     */
     public function changePassword(ChangePassword $request)
     {
         $input = $request->safe()->only(['current_password', 'new_password', 'confirm_password']);

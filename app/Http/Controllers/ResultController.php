@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\Auth;
 
 class ResultController extends Controller
 {
+    /**
+     * @Handle an incoming request Show list results of user
+     * @return view('result') 
+     */
     function showResult()
     {
         $user = User::find(Auth::user()->id);
