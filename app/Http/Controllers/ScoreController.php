@@ -6,21 +6,33 @@ use App\Http\Requests\ScoreRequest;
 use App\Models\Subject;
 use App\Models\User;
 use App\Models\UserSubject;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class ScoreController extends Controller
 {
-    public function index(int $user_id, int $subject_id)
+    /**
+     * @Handle an incoming request page insert score
+     * @param $userId, $subjectId
+     * @return view('insertScore')
+     */
+    public function index(int $userId, int $subjectId)
     {
-        $user = User::find($user_id);
-        $subject = Subject::find($subject_id);
+        $user = User::find($userId);
+        $subject = Subject::find($subjectId);
         return view('insertScore', compact('user', 'subject'));
     }
-    public function storeScore(int $user_id, int $subject_id, ScoreRequest $request)
+
+    /**
+     * @Handle an incoming request insert score for user in subject
+     * @param \Illuminate\Requests\RegisterRequest  $request,
+     * @param $userId, $subjectId 
+     * @return  redirect
+     */
+    public function storeScore(int $userId, int $subjectId, ScoreRequest $request)
     {
-        UserSubject::where('user_id', $user_id)
-            ->where('subject_id', $subject_id)
-            ->update(['score_process' => $request->score_process, 'score_test' => $request->score_test]);    
-        return redirect()->route('subject.detail',['id' => $subject_id]);
+        UserSubject::where('user_id', $userId)
+            ->where('subject_id', $subjectId)
+            ->update(['score_process' => $request->score_process, 'score_test' => $request->score_test]);
+        return redirect()->route('subject.detail', ['id' => $subjectId]);
     }
 }

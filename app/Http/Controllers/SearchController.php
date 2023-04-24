@@ -8,9 +8,16 @@ use Illuminate\Support\Facades\Auth;
 
 class SearchController extends Controller
 {
-    public function search(Request $request){
+    
+    /**
+     * @Handle an incoming request show list results search
+     * @param  \Illuminate\Http\Request  $request
+     * @return view('showResultSearch')
+     */
+    public function search(Request $request)
+    {
         $user = Auth::user();
-        $search = Subject::where('subject_name', 'like', '%'.$request->search.'%')->get();
-        return view('showResultSearch', compact('search','user'));
+        $search = Subject::where('subject_name', 'like', '%' . $request->search . '%')->get();
+        return view('showResultSearch', compact('search', 'user'));
     }
 }

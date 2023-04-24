@@ -13,23 +13,41 @@ use Illuminate\Support\Facades\Auth;
 
 class SubjectController extends Controller
 {
+    /**
+     * @Handle an incoming request show list subject
+     * @param int $id
+     * @return view('listSubject');
+     */
     public function getListSubject()
     {
         $user = User::find(Auth::user()->id);
-        $subject_applies = $user->subject()->pluck('subject_id');
-        $list_subject_teacher = Subject::where('teacher_id', $user->id)->get();
-        $list_subject = Subject::whereNotIn('id', $subject_applies)->get();
-        return view('listSubject', compact('list_subject', 'user', 'list_subject_teacher'));
+        $subjectApplies = $user->subject()->pluck('subject_id');
+        $listSubjectTeacher = Subject::where('teacher_id', $user->id)->get();
+        $listSubject = Subject::whereNotIn('id', $subjectApplies)->get();
+        return view('listSubject', compact('listSubject', 'user', 'listSubjectTeacher'));
     }
+
+    /**
+     * @Handle an incoming request create Subject
+     * @param int $id
+     * @return view('subjecctDetail');
+     */
     public function subjectDetail(int $id)
     {
         $subject = Subject::find($id);
         $user = Auth::user();
         $student = $subject->user()->get();
-        $user_subject = UserSubject::where('subject_id', $subject->id)->get();
-        $role_user_login = Auth::user()->role;
-        return view('subjectDetail', compact('subject', 'user', 'student', 'user_subject','role_user_login'));
+        $userSubject = UserSubject::where('subject_id', $subject->id)->get();
+        $roleUserLogin = Auth::user()->role;
+        return view('subjecctDetail', compact('subject', 'user', 'student', 'userSubject', 'roleUserLogin'));
     }
+
+    /**
+     * @Handle an incoming request update Subject
+     * @param  App\Http\Requests\SubjectRequest $request
+     * @param int $id
+     * @return redirect('subjects');
+     */
     public function updateSubject(SubjectRequest $request, int $id)
     {
         $subject = Subject::find($id);
@@ -40,65 +58,104 @@ class SubjectController extends Controller
         return redirect('subjects');
     }
 
+
+    /**
+     * @Handle an incoming request page add subject
+     * @return view('createSubject');
+     */
     public function indexAddSubject()
     {
         $user = Auth::user();
         return view('createSubject', compact('user'));
     }
+
+    /**
+     * @Handle an incoming request create Subject
+     * @param  App\Http\Requests\SubjectRequest $request
+     * @return redirect('subjects');
+     */
     public function createSubject(SubjectRequest $request)
     {
-
-        $teacher_id = Auth::user()->id;
+        $teacherId = Auth::user()->id;
         Subject::create([
             'subject_name' => $request->subject_name,
             'start_date' => $request->start_date,
             'end_date' => $request->end_date,
-            'teacher_id' => $teacher_id,
+            'teacher_id' => $teacherId,
             'created_at' => Carbon::now(),
             'updated_at' => null,
         ]);
         return redirect('subjects');
     }
+
+     /**
+     * @Handle an incoming request page update subject
+     * @param  $id
+     * @return view('updateSubject');
+     */
     public function indexUpdateSubject($id)
     {
         $subject = Subject::find($id);
         return view('updateSubject', compact('subject'));
     }
 
+    /**
+     * @Handle an incoming request delete subject;
+     * @param  $id
+     * @return redirect('subjects');
+     */
     public function deleteSubject(int $id)
     {
         $subject = Subject::find($id);
         $user = $subject->user()->pluck('user_id');
-        $count_user = count($user);
-        if ($count_user == 0) {
+        $countUser = count($user);
+        if ($countUser == 0) {
             $subject->delete();
         }
         return redirect('subjects');
     }
+
+    /**
+     * @Handle an incoming request add students the subject
+     * @param  $id
+     * @param   App\Http\Requests\AddStudentRequest $request
+     * @return redirect()->back();
+     */
     public function addStudent(AddStudentRequest $request, int $id)
     {
-        
         $user = User::find($request->id);
         $subject = Subject::find($id);
-        if($user == null) {
+        if ($user == null) {
             return redirect()->back();
         }
-        $user_subject = UserSubject::where('user_id', $user->id)
+        $userSubject = UserSubject::where('user_id', $user->id)
             ->where('subject_id', $subject->id)
             ->first();
-        if ($user != null && $user->role == 0 && $user_subject == null) {
+        if (!$user && $user->role == 0 && $userSubject) {
             $subject->user()->attach($user->id);
         }
         return redirect()->back();
     }
-    public function removeStudent(int $user_id, int $subject_id)
+
+    /**
+     * @Handle an incoming request remove student in subject
+     * @param  $userId ,$subjectId
+     * @return redirect()->back();
+     */
+    public function removeStudent(int $userId, int $subjectId)
     {
-        $subject = Subject::find($subject_id);
+        $subject = Subject::find($subjectId);
         if (Auth::user()->role == 1) {
-            $subject->user()->detach($user_id);
+            $subject->user()->detach($userId);
         }
         return redirect()->back();
     }
+   
+     /**
+     * @Handle an incoming request join the subject
+     * @param  $id
+     * @return redirect()->back();
+     */
     public function joinSubject(int $id)
     {
         $subject = Subject::find($id);
@@ -108,10 +165,15 @@ class SubjectController extends Controller
         }
         return redirect()->back();
     }
+
+    /**
+     * @Handle an incoming request Show list subject of student
+     * @return view('listSubjectStudent')
+     */
     public function showListSubjectStudent()
     {
         $user = User::find(Auth::user()->id);
-        $list_subject = $user->subject()->get();
-        return view('listSubjectStudent', compact('list_subject','user'));
+        $listSubject = $user->subject()->get();
+        return view('listSubjectStudent', compact('listSubject', 'user'));
     }
 }

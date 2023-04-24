@@ -8,11 +8,15 @@ use Illuminate\Support\Facades\Auth;
 
 class ResultController extends Controller
 {
+    /**
+     * @Handle an incoming request Show list results of user
+     * @return view('result') 
+     */
     function showResult()
     {
         $user = User::find(Auth::user()->id);
         $subject = $user->subject()->get();
-        $user_subject = UserSubject::where('user_id', $user->id)->get();
-        return view('result',compact('user_subject', 'subject'));
+        $userSubject = UserSubject::where('user_id', $user->id)->get();
+        return view('result', compact('userSubject', 'subject'));
     }
 }

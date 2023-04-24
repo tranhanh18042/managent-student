@@ -4,30 +4,36 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UserRequest;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
+    /**
+     * @Handle an incoming request show list students
+     * @return view('listUsers')
+     */
     public function getListUsers()
     {
         $users = User::where('role', 0)->get();
         return view('listUsers', compact('users'));
     }
+    
+    /**
+     * @Handle an incoming request Show profile user
+     * @return view('profileUser')
+     */
     public function getUserByID()
     {
         $userRes = Auth::user();
         return view('profileUser', compact('userRes'));
     }
-    public function edit()
-    {
-        $user = Auth::user();
-        return view('updateProfile', compact('user'));
-    }
-
+    
+    /**
+     * @Handle an incoming request update profile user
+     * @param  \Illuminate\Requests\UserRequest  $request
+     * @return redirect()->route('profile')
+     */
     public function updateUser(UserRequest $request)
     {
         $user = Auth::user();
@@ -53,7 +59,6 @@ class UserController extends Controller
                     'email' => $request->email
                 ]);
         }
-
         return redirect()->route('profile');
     }
 }

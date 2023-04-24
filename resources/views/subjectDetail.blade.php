@@ -154,7 +154,7 @@
         </div>
     </section>
 
-    @if ($role_user_login == 1 && $user->id == $subject->teacher_id)
+    @if ($roleUserLogin == 1 && $user->id == $subject->teacher_id)
         <section style="background-color: #eee;">
             <div style="padding-left: 16.5%">
                 <form action="{{ url('/add-student' . '/' . $subject->id) }}" method="POST">
@@ -168,7 +168,7 @@
         </section>
     @endif
 
-    @if ($role_user_login == 1 && $user->id == $subject->teacher_id)
+    @if ($roleUserLogin == 1 && $user->id == $subject->teacher_id)
         <section class="w-100 p-4 table-responsive"
             style="display: flex; justify-content: center; background-color: #eee;">
             <table class="table  table-striped mb-0 bg-white" style="width: 69%; ">
@@ -199,7 +199,7 @@
                                     </div>
                                 </td>
                                 <td>{{ $student->address }}</td>
-                                @foreach ($user_subject as $rs)
+                                @foreach ($userSubject as $rs)
                                     @if ($student->id == $rs->user_id)
                                         <td>{{ $rs->score_process }}</td>
                                         <td>{{ $rs->score_test }}</td>

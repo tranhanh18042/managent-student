@@ -102,7 +102,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($list_subject as $subject)
+                    @foreach ($listSubject as $subject)
                         @csrf
                         <tr>
                             <td>{{ $subject->subject_name }}</td>

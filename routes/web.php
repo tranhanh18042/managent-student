@@ -23,7 +23,7 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Route::get('/register', [RegisterController::class,'index'])->name('register');
+Route::get('/register', [RegisterController::class, 'index'])->name('register');
 Route::post('/register', [RegisterController::class, 'storeRegister'])->name('register.create');
 
 Route::get('/login', [LoginController::class, 'showloginErr'])->name('login');
