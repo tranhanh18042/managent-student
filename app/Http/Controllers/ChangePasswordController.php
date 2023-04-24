@@ -27,18 +27,17 @@ class ChangePasswordController extends Controller
      */
     public function changePassword(ChangePassword $request)
     {
-        $input = $request->safe()->only(['current_password', 'new_password', 'confirm_password']);
         $user = Auth::user();
-        $checkPass = Hash::check($input['current_password'], $user->password);
-        if ($checkPass == true) {
-            if ($input['current_password'] != $input['new_password'] && $input['new_password'] == $input['confirm_password']) {
-                User::whereId(auth()->user()->id)->update([
-                    'password' => Hash::make($input['new_password'])
+        $checkPass = Hash::check($request['current_password'], $user->password);
+        if ($checkPass) {
+            if ($request['current_password'] != $request['new_password'] && $request['new_password'] == $request['confirm_password']) {
+                User::whereId(Auth::id())->update([
+                    'password' => Hash::make($request['new_password'])
                 ]);
                 Auth::logout();
                 return redirect()->route('login');
             }
-        } else if ($input != null) {
+        } else if ($request != null) {
             Session::flash('error', "nhap sai thong tin");
             return redirect()->back();
         }

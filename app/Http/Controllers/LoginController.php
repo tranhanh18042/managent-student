@@ -29,7 +29,7 @@ class LoginController extends Controller
     {
         $user = User::whereEmail($request->email)->first();
         $checkPass = Hash::check($request->password, $user->password);
-        if ($user != null && $checkPass == true) {
+        if (!$user && $checkPass) {
             Auth::login($user);
             return redirect()->route('home');
         }

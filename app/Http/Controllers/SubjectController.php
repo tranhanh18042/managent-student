@@ -131,7 +131,7 @@ class SubjectController extends Controller
         $userSubject = UserSubject::where('user_id', $user->id)
             ->where('subject_id', $subject->id)
             ->first();
-        if ($user != null && $user->role == 0 && $userSubject == null) {
+        if (!$user && $user->role == 0 && $userSubject) {
             $subject->user()->attach($user->id);
         }
         return redirect()->back();
