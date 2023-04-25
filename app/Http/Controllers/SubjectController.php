@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\AddStudentRequest;
 use App\Http\Requests\SubjectRequest;
+use App\Jobs\AddClassJob;
+use App\Mail\MailAddClass;
 use App\Models\Subject;
 use App\Models\User;
 use App\Models\UserSubject;
@@ -30,7 +32,7 @@ class SubjectController extends Controller
     /**
      * @Handle an incoming request create Subject
      * @param int $id
-     * @return view('subjecctDetail');
+     * @return view('subjectDetail');
      */
     public function subjectDetail(int $id)
     {
@@ -39,7 +41,7 @@ class SubjectController extends Controller
         $student = $subject->user()->get();
         $userSubject = UserSubject::where('subject_id', $subject->id)->get();
         $roleUserLogin = Auth::user()->role;
-        return view('subjecctDetail', compact('subject', 'user', 'student', 'userSubject', 'roleUserLogin'));
+        return view('subjectDetail', compact('subject', 'user', 'student', 'userSubject', 'roleUserLogin'));
     }
 
     /**
@@ -134,6 +136,13 @@ class SubjectController extends Controller
         if (!$user && $user->role == 0 && $userSubject) {
             $subject->user()->attach($user->id);
         }
+
+        $infoUser = [
+            'name' => $user->name,
+            'email' => $user->email,
+            'subject_name' => $subject->subject_name
+        ];
+        AddClassJob::dispatch($infoUser);
         return redirect()->back();
     }
 
