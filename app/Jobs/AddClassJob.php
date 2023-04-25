@@ -32,6 +32,5 @@ class AddClassJob implements ShouldQueue
     public function handle()
     {
         Mail::to($this->infoUser['email'])->send(new MailAddClass($this->infoUser));
-        dd('success');
     }
 }
