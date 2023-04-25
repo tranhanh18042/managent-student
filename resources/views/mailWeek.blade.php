@@ -14,8 +14,9 @@
     </center>
 
     <p>Hi, {{ $name }}</p>
-    <p>Bạn đã được thêm vào lớp {{ $subject_name }} !!!</p>
-
+    <p>ket qua mon hoc {{ $subject_name }} !!!</p>
+    <p>score_process {{ $score_process }} !!!</p>
+    <p>score_process {{ $score_test }} !!!</p>
     <strong>Thank you {{ $name }}!</strong>
 
 </body>
