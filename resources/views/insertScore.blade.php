@@ -63,7 +63,7 @@
                             <a class="nav-link" href="{{ route('logout') }}">Logout</a>
                         </li>
                         <li class="nav-item">
-                            <form action="{{route('search')}}" method="GET">
+                            <form action="{{ route('search') }}" method="GET">
                                 @csrf
                                 <div class="input-group">
                                     <div class="form-outline">
@@ -110,10 +110,10 @@
                             <div class="bg-secondary-soft px-4 py-5 rounded">
                                 <div class="row g-3">
                                     <div class="col-md-6">
-                                        <label class="form-label">Name : {{$user->name}}</label>
+                                        <label class="form-label">Name : {{ $user->name }}</label>
                                     </div>
                                     <div class="col-md-6">
-                                        <label class="form-label">Subject : {{$subject->subject_name}}</label>
+                                        <label class="form-label">Subject : {{ $subject->subject_name }}</label>
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label">Score Process </label>

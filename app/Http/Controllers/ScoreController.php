@@ -35,4 +35,8 @@ class ScoreController extends Controller
             ->update(['score_process' => $request->score_process, 'score_test' => $request->score_test]);
         return redirect()->route('subject.detail', ['id' => $subjectId]);
     }
+    public function deleteSection()
+    {
+        
+    }
 }

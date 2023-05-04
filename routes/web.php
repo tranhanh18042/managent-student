@@ -9,6 +9,7 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ResultController;
 use App\Http\Controllers\ScoreController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\ShowDetailSection;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\UserController;
 
@@ -40,7 +41,8 @@ Route::middleware(['login'])->group(function () {
     Route::put('/change-password', [ChangePasswordController::class, 'changePassword']);
     Route::get('/subjects', [SubjectController::class, 'getListSubject'])->name('subjects');
     Route::get('/subject-detail/{id}', [SubjectController::class, 'subjectDetail'])->name('subject.detail');
-
+    Route::get('/show-detail-section/{id}', [ShowDetailSection::class,'index'])->name('show.detail.section');
+   
     Route::middleware(['roleTeacher'])->group(function () {
         Route::get('/subject', [SubjectController::class, 'indexAddSubject'])->name('create.subject');
         Route::post('/subject', [SubjectController::class, 'createSubject']);
@@ -52,6 +54,11 @@ Route::middleware(['login'])->group(function () {
         Route::get('/score/{user_id}/{subject_id}', [ScoreController::class, 'index'])->name('score');
         Route::put('/score/{user_id}/{subject_id}', [ScoreController::class, 'storeScore']);
         Route::get('/users', [UserController::class, 'getListUsers'])->name('listUsers');
+        Route::get('/edit-subject-section/{id}', [ShowDetailSection::class, 'formEditSubjectSection']);
+        Route::put('/edit-subject-section/{id}', [ShowDetailSection::class, 'editSubjectSection']);
+        Route::delete('/delete-subject-section/{id}', [ShowDetailSection::class, 'deleteSubjectSection']);
+        Route::delete('/delete-document/{id}', [ShowDetailSection::class, 'deleteDocument']);
+
     });
 
     Route::middleware(['roleStudent'])->group(function () {

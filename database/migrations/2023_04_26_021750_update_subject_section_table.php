@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Nette\Schema\Schema as SchemaSchema;
 
 return new class extends Migration
 {
@@ -13,15 +14,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('subjects', function (Blueprint $table) {
-            $table->id();
-            $table->string('subject_name');
-            $table->bigInteger('teacher_id');
-            $table->dateTime('start_date');
-            $table->dateTime('end_date');
-            $table->timestamps();
+        Schema::table('subject_sections',function(Blueprint $table){
+            $table->integer('stt');
         });
-
     }
 
     /**
@@ -31,6 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('table');
+        Schema::dropIfExists('subject_sections');
     }
 };
