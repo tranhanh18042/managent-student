@@ -7,6 +7,7 @@ use App\Http\Requests\SubjectRequest;
 use App\Jobs\AddClassJob;
 use App\Mail\MailAddClass;
 use App\Models\Subject;
+use App\Models\SubjectSections;
 use App\Models\User;
 use App\Models\UserSubject;
 use Carbon\Carbon;
@@ -30,7 +31,7 @@ class SubjectController extends Controller
     }
 
     /**
-     * @Handle an incoming request create Subject
+     * @Handle an incoming request show Subject detail
      * @param int $id
      * @return view('subjectDetail');
      */
@@ -41,7 +42,8 @@ class SubjectController extends Controller
         $student = $subject->user()->get();
         $userSubject = UserSubject::where('subject_id', $subject->id)->get();
         $roleUserLogin = Auth::user()->role;
-        return view('subjectDetail', compact('subject', 'user', 'student', 'userSubject', 'roleUserLogin'));
+        $listTitleSection = $subject->subjectSections()->get();
+        return view('subjectDetail', compact('subject', 'user', 'student', 'userSubject', 'roleUserLogin', 'listTitleSection'));
     }
 
     /**
@@ -90,7 +92,7 @@ class SubjectController extends Controller
         return redirect('subjects');
     }
 
-     /**
+    /**
      * @Handle an incoming request page update subject
      * @param  $id
      * @return view('updateSubject');
@@ -133,7 +135,7 @@ class SubjectController extends Controller
         $userSubject = UserSubject::where('user_id', $user->id)
             ->where('subject_id', $subject->id)
             ->first();
-        if (!$user && $user->role == 0 && $userSubject) {
+        if ($user != null && $user->role == 0 && $userSubject == null) {
             $subject->user()->attach($user->id);
         }
 
@@ -159,8 +161,8 @@ class SubjectController extends Controller
         }
         return redirect()->back();
     }
-   
-     /**
+
+    /**
      * @Handle an incoming request join the subject
      * @param  $id
      * @return redirect()->back();

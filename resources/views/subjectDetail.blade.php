@@ -220,6 +220,44 @@
         </section>
     @endif
 
+    @if ($roleUserLogin == 1 && $user->id == $subject->teacher_id)
+        <section style="background-color: #eee;">
+            <section style="background-color: #eee;">
+                <div style="padding-left: 16.5%">
+                    <a href="#" class="btn btn-success">Thêm bài học</a>
+                </div>
+            </section>
+    @endif
+    <section class="w-100 p-4 table-responsive"
+        style="display: flex; justify-content: center; background-color: #eee;">
+        <table class="table  table-striped mb-0 bg-white" style="width: 69%; ">
+            <thead class="bg-light">
+                <tr>
+                    <th scope="col">STT</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($listTitleSection as $titleSection)
+                    <form action="{{url('/delete-subject-section'.'/'.$titleSection->id)}}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <td>{{ $titleSection->id }}</td>
+                        <td>{{ $titleSection->title }}</td>
+                        <td>
+                            <a class="btn btn-primary"
+                                href="{{ url('/show-detail-section' . '/' . $titleSection->id) }}}">Chi tiết</a>
+                            <a class="btn btn-primary"
+                                href="{{ url('/edit-subject-section' . '/' . $titleSection->id) }}">
+                                Edit</a>
+                            <button type="submit" class="btn btn-danger">Xóa</button>
+                        </td>
+                    </form>
+                @endforeach
+        </table>
+    </section>
+
 
     <!-- Optional JavaScript; choose one of the two! -->
 
