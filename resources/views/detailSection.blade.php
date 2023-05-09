@@ -13,7 +13,7 @@
     <title>Hello, world!</title>
 </head>
 
-<body>document
+<body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <!-- Container wrapper -->
