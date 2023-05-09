@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UpdateSubjectSection;
 use App\Models\Document;
-use App\Models\Reference;
 use App\Models\SubjectSections;
 
 class ShowDetailSection extends Controller
@@ -12,8 +11,8 @@ class ShowDetailSection extends Controller
     public function index($id)
     {
         $subjectSection = SubjectSections::find($id);
-        $references = $subjectSection->document()->get();
-        return view('detailSection', compact('subjectSection', 'references'));
+        $documents = $subjectSection->document()->get();
+        return view('detailSection', compact('subjectSection', 'documents'));
     }
     public function formEditSubjectSection($id)
     {
@@ -35,7 +34,7 @@ class ShowDetailSection extends Controller
     public function deleteSubjectSection(int $id)
     {
         $subjectSection = SubjectSections::find($id);
-        
+
         $subjectSection->subject()->dissociate();
         $subjectSection->save();
         return redirect()->back();
@@ -43,11 +42,10 @@ class ShowDetailSection extends Controller
     public function deleteDocument($id)
     {
         $document = Document::find($id)->delete();
-        return redirect()->route('show.detail.section',['id',$id]);
+        return redirect()->route('show.detail.section', ['id', $id]);
     }
     public function indexAddDocument()
     {
-        
     }
     public function addDocument()
     {

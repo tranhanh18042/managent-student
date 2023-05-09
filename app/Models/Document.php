@@ -12,6 +12,9 @@ class Document extends Model
     protected $fillable = [
         'type',
         'reference',
-        'subject_sections_id'
+        'subject_sections_id',
     ];
+    public function subjectSection(){
+        return $this->belongsTo(SubjectSections::class, 'subject_sections_id','id');
+    }
 }

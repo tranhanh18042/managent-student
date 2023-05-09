@@ -17,7 +17,7 @@ class SubjectSections extends Model
         'subject_id',
     ];
     public function document(){
-        return $this->hasMany(Document::class,'id','sections_id');
+        return $this->hasMany(Document::class,'subject_sections_id','id');
     }
     public function subject(){
         return $this->belongsTo(Subject::class,'subject_id','id');

@@ -17,7 +17,7 @@ class DocumentFactory extends Factory
     public function definition()
     {
         return [
-            'type' => fake()->numberBetween(1,3),
+            'type' => fake()->numberBetween(1,2),
             'name_documents' => fake()->text(),
             'subject_sections_id' => fake() -> numberBetween(1,10),
         ];
