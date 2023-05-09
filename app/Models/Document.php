@@ -11,7 +11,8 @@ class Document extends Model
 
     protected $fillable = [
         'type',
-        'reference',
+        'name_document',
+        'link_document',
         'subject_sections_id',
     ];
     public function subjectSection(){

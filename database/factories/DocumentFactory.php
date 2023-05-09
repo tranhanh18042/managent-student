@@ -19,6 +19,7 @@ class DocumentFactory extends Factory
         return [
             'type' => fake()->numberBetween(1,2),
             'name_documents' => fake()->text(),
+            'link_documents' => 'http://media.w3.org/2010/05/sintel/trailer.webm',
             'subject_sections_id' => fake() -> numberBetween(1,10),
         ];
     }

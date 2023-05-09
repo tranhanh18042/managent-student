@@ -39,16 +39,4 @@ class ShowDetailSection extends Controller
         $subjectSection->save();
         return redirect()->back();
     }
-    public function deleteDocument($id)
-    {
-        $document = Document::find($id)->delete();
-        return redirect()->route('show.detail.section', ['id', $id]);
-    }
-    public function indexAddDocument()
-    {
-    }
-    public function addDocument()
-    {
-        dd(1);
-    }
 }

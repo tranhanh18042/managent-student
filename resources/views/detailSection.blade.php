@@ -102,40 +102,38 @@
             </p>
         </div>
     </section>
-    <section style="background-color: #eee;">
+    <section style="background-color: #eee; margin-top: 30px; margin-bottom: 30px;">
         <div style="padding-left: 5%">
-            <a href="#" class="btn btn-success">Thêm tài liệu</a>
+            <a href="{{ url('/add-document' . '/' . $subjectSection->id) }}" class="btn btn-success">Thêm tài liệu</a>
         </div>
     </section>
     <section style="padding-left: 5%; padding-right: 5%; display: flex; justify-content: center;">
-        <div style="padding-right: 20px">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">Tài liệu</th>
-                        <th scope="col">Action</th>
+        <table class="table" style="margin-right: 50px">
+            <thead>
+                <tr>
+                    <th scope="col">Tài liệu</th>
+                    <th scope="col">Action</th>
 
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($documents as $document)
-                        <form action="{{url('/delete-document'.'/'.$document->id)}}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            @if ($document->type == 1)
-                                <tr>
-                                    <td>{{ $document->document }}</td>
-                                    <td>
-                                        <button type="submit" class="btn btn-danger">Xóa</button>
-                                    </td>
-                                </tr>
-                            @endif
-                        </form>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
-        <table class="table">
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($documents as $document)
+                    <form action="{{ url('/delete-document' . '/' . $document->id) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        @if ($document->type == 1)
+                            <tr>
+                                <td><a href="{{ $document->link_document }}">{{ $document->name_document }}</a></td>
+                                <td>
+                                    <button type="submit" class="btn btn-danger">Xóa</button>
+                                </td>
+                            </tr>
+                        @endif
+                    </form>
+                @endforeach
+            </tbody>
+        </table>
+        <table class="table" style="margin-right: 50px">
             <thead>
                 <tr>
                     <th scope="col">Bài viết tham khảo</th>
@@ -144,18 +142,23 @@
             </thead>
             <tbody>
                 @foreach ($documents as $document)
-                    @if ($document->type == 0)
-                        <tr>
-                            <td>{{ $document->document }}</td>
-                            <td>
-                                <button type="submit" class="btn btn-danger">Xóa</button>
-                            </td>
-                        </tr>
-                    @endif
+                    <form action="{{ url('/delete-document' . '/' . $document->id) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        @if ($document->type == 2)
+                            <tr>
+                                <td><a href="{{ $document->link_document }}">{{ $document->name_document }}</a></td>
+                                <td>
+                                    <button type="submit" class="btn btn-danger">Xóa</button>
+                                </td>
+                            </tr>
+                        @endif
+                    </form>
                 @endforeach
             </tbody>
         </table>
     </section>
+
     <!-- Navbar -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
