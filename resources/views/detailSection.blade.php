@@ -13,7 +13,7 @@
     <title>Hello, world!</title>
 </head>
 
-<body>
+<body>document
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <!-- Container wrapper -->
@@ -118,13 +118,13 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($references as $reference)
-                        <form action="{{url('/delete-document'.'/'.$reference->id)}}" method="POST">
+                    @foreach ($documents as $document)
+                        <form action="{{url('/delete-document'.'/'.$document->id)}}" method="POST">
                             @csrf
                             @method('DELETE')
-                            @if ($reference->type == 1)
+                            @if ($document->type == 1)
                                 <tr>
-                                    <td>{{ $reference->reference }}</td>
+                                    <td>{{ $document->document }}</td>
                                     <td>
                                         <button type="submit" class="btn btn-danger">Xóa</button>
                                     </td>
@@ -143,10 +143,10 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($references as $reference)
-                    @if ($reference->type == 0)
+                @foreach ($documents as $document)
+                    @if ($document->type == 0)
                         <tr>
-                            <td>{{ $reference->reference }}</td>
+                            <td>{{ $document->document }}</td>
                             <td>
                                 <button type="submit" class="btn btn-danger">Xóa</button>
                             </td>
