@@ -17,7 +17,8 @@ return new class extends Migration
         Schema::create('documents', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('type');
-            $table->text('name_documents');
+            $table->text('name_document');
+            $table->text('link_document');
             $table->unsignedBigInteger('subject_sections_id')->nullable();
             $table->foreign('subject_sections_id')->references('id')->on('subject_sections')->onDelete('cascade');
             $table->timestamps();

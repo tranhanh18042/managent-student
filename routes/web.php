@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AddDocument;
 use App\Http\Controllers\AddSectionController;
 use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\HomeController;
@@ -43,6 +44,7 @@ Route::middleware(['login'])->group(function () {
     Route::get('/subjects', [SubjectController::class, 'getListSubject'])->name('subjects');
     Route::get('/subject-detail/{id}', [SubjectController::class, 'subjectDetail'])->name('subject.detail');
     Route::get('/show-detail-section/{id}', [ShowDetailSection::class,'index'])->name('show.detail.section');
+
    
     Route::middleware(['roleTeacher'])->group(function () {
         Route::get('/subject', [SubjectController::class, 'indexAddSubject'])->name('create.subject');
@@ -58,10 +60,14 @@ Route::middleware(['login'])->group(function () {
         Route::get('/edit-subject-section/{id}', [ShowDetailSection::class, 'formEditSubjectSection']);
         Route::put('/edit-subject-section/{id}', [ShowDetailSection::class, 'editSubjectSection']);
         Route::delete('/delete-subject-section/{id}', [ShowDetailSection::class, 'deleteSubjectSection']);
-        Route::delete('/delete-document/{id}', [ShowDetailSection::class, 'deleteDocument']);
+        Route::delete('/delete-document/{id}', [AddDocument::class, 'deleteDocument']);
 
         Route::get('/add-section/{id}',[AddSectionController::class, 'index']);
         Route::post('/add-section/{subject_id}',[AddSectionController::class, 'addSection']);
+
+        Route::get('/add-document/{id}',[AddDocument::class, 'index']);
+        Route::post('/add-document/{id}',[AddDocument::class, 'addDocument']);
+
     });
 
     Route::middleware(['roleStudent'])->group(function () {
