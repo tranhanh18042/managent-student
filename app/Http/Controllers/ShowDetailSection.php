@@ -12,7 +12,7 @@ class ShowDetailSection extends Controller
     public function index($id)
     {
         $subjectSection = SubjectSections::find($id);
-        $references = $subjectSection->reference()->get();
+        $references = $subjectSection->document()->get();
         return view('detailSection', compact('subjectSection', 'references'));
     }
     public function formEditSubjectSection($id)
@@ -36,7 +36,8 @@ class ShowDetailSection extends Controller
     {
         $subjectSection = SubjectSections::find($id);
         
-        $subjectSection->subject()->dissociate()->save();
+        $subjectSection->subject()->dissociate();
+        $subjectSection->save();
         return redirect()->back();
     }
     public function deleteDocument($id)
