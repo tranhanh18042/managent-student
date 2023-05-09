@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\ResetPassword;
 use App\Http\Controllers\ResultController;
 use App\Http\Controllers\ScoreController;
 use App\Http\Controllers\SearchController;
@@ -29,6 +30,8 @@ Route::post('/register', [RegisterController::class, 'storeRegister'])->name('re
 
 Route::get('/login', [LoginController::class, 'showloginErr'])->name('login');
 Route::post('/login-custom', [LoginController::class, 'login'])->name('login.custom');
+
+Route::get('/reset-password',[ResetPassword::class, 'index'])->name('reset.password');
 
 Route::middleware(['login'])->group(function () {
     Route::get('/search', [SearchController::class, 'search'])->name('search');
