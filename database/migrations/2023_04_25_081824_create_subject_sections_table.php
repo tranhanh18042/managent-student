@@ -14,10 +14,13 @@ return new class extends Migration
     public function up()
     {
         Schema::create('subject_sections', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->string('title');
             $table->string('video_url');
             $table->string('description');
+            $table->integer('stt');
+            $table->unsignedBigInteger('subject_id')->nullable();
+            $table->foreign('subject_id')->references('id')->on('subjects')->onDelete('cascade');
             $table->timestamps();
         });    
     }

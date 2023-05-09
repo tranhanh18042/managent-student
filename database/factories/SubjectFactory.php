@@ -17,7 +17,6 @@ class SubjectFactory extends Factory
     public function definition()
     {
         return [
-            'subject_sections_id' => fake() -> numberBetween(1,10),
             'subject_name' => fake()->name(),
             'teacher_id' => fake() -> numberBetween(1,10),
             'start_date' => new \DateTime('now'),
