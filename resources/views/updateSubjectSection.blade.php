@@ -101,7 +101,7 @@
                 <!-- Form START -->
                 <form action="" method="POST">
                     @csrf
-                    @method('DELETE')
+                    @method('PUT')
                     <div class="row mb-5 gx-5">
                         <!-- Contact detail -->
                         <div class="col-xxl-8 mb-5 mb-xxl-0">
