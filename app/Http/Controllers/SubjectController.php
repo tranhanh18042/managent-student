@@ -42,7 +42,7 @@ class SubjectController extends Controller
         $student = $subject->user()->get();
         $userSubject = UserSubject::where('subject_id', $subject->id)->get();
         $roleUserLogin = Auth::user()->role;
-        $listTitleSection = $subject->subjectSections()->get();
+        $listTitleSection = $subject->subjectSections()->get()->sortBy('stt');
         return view('subjectDetail', compact('subject', 'user', 'student', 'userSubject', 'roleUserLogin', 'listTitleSection'));
     }
 

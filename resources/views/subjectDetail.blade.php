@@ -244,7 +244,7 @@
                         @csrf
                         @method('DELETE')
                         <tr>
-                            <td>{{ $titleSection->id }}</td>
+                            <td>{{ $titleSection->stt }}</td>
                             <td>{{ $titleSection->title }}</td>
                             <td>
                                 <a class="btn btn-primary"

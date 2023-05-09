@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UpdateSubjectSection;
+use App\Models\Document;
 use App\Models\Reference;
 use App\Models\SubjectSections;
 
@@ -40,7 +41,7 @@ class ShowDetailSection extends Controller
     }
     public function deleteDocument($id)
     {
-        $reference = Reference::find($id)->delete();
+        $document = Document::find($id)->delete();
         return redirect()->route('show.detail.section',['id',$id]);
     }
     public function indexAddDocument()
