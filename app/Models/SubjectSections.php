@@ -13,9 +13,13 @@ class SubjectSections extends Model
         'title',
         'video_url',
         'description',
-        'references',
+        'stt',
+        'reference_id',
     ];
     public function reference(){
-        return $this->hasMany(Reference::class,'id','reference_id');
+        return $this->hasMany(Document::class,'id','reference_id');
+    }
+    public function subject(){
+        return $this->belongsTo(Subject::class,'id','sections_id');
     }
 }

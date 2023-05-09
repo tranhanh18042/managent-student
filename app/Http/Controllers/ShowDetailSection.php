@@ -3,11 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UpdateSubjectSection;
-use App\Models\Document;
 use App\Models\Reference;
 use App\Models\SubjectSections;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Request;
 
 class ShowDetailSection extends Controller
 {
@@ -36,10 +33,9 @@ class ShowDetailSection extends Controller
     }
     public function deleteSubjectSection(int $id)
     {
-        dd(1);
         $subjectSection = SubjectSections::find($id);
-        Reference::where('id', $subjectSection->reference_id)->delete();
-        $subjectSection->delete();
+        
+        $subjectSection->subject()->dissociate()->save();
         return redirect()->back();
     }
     public function deleteDocument($id)

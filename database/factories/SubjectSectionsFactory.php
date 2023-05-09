@@ -21,7 +21,7 @@ class SubjectSectionsFactory extends Factory
             'stt' => fake()->numberBetween(1,10),
             'video_url' => 'http://media.w3.org/2010/05/sintel/trailer.webm',
             'description' => fake()->text(),
-            'reference_id' => fake()->numberBetween(1,10),
+            'subject_id' => fake() -> numberBetween(1,10),
         ];
     }
 }

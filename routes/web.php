@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AddSectionController;
 use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
@@ -59,6 +60,8 @@ Route::middleware(['login'])->group(function () {
         Route::delete('/delete-subject-section/{id}', [ShowDetailSection::class, 'deleteSubjectSection']);
         Route::delete('/delete-document/{id}', [ShowDetailSection::class, 'deleteDocument']);
 
+        Route::get('/add-section/{id}',[AddSectionController::class, 'index']);
+        Route::post('/add-section/{subject_id}',[AddSectionController::class, 'addSection']);
     });
 
     Route::middleware(['roleStudent'])->group(function () {
