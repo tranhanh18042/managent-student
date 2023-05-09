@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Subject;
-use App\Models\SubjectSections;
 use Illuminate\Http\Request;
 
 class AddSectionController extends Controller
@@ -22,6 +21,6 @@ class AddSectionController extends Controller
             'video_url' => $request->video_url,
         ]);
         
-        return redirect()->back();
+        return redirect()->route('subject.detail',['id' => $id]);
     }
 }
