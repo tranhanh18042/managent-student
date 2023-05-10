@@ -102,18 +102,24 @@
             </p>
         </div>
     </section>
-    <section style="background-color: #eee; margin-top: 30px; margin-bottom: 30px;">
-        <div style="padding-left: 5%">
-            <a href="{{ url('/add-document' . '/' . $subjectSection->id) }}" class="btn btn-success">Thêm tài liệu</a>
-        </div>
-    </section>
+
+    @if ($role == 1)
+        <section style="background-color: #eee; margin-top: 30px; margin-bottom: 30px;">
+            <div style="padding-left: 5%">
+                <a href="{{ url('/add-document' . '/' . $subjectSection->id) }}" class="btn btn-success">Thêm tài
+                    liệu</a>
+            </div>
+        </section>
+    @endif
+
     <section style="padding-left: 5%; padding-right: 5%; display: flex; justify-content: center;">
         <table class="table" style="margin-right: 50px">
             <thead>
                 <tr>
                     <th scope="col">Tài liệu</th>
-                    <th scope="col">Action</th>
-
+                    @if ($role == 1)
+                        <th scope="col">Action</th>
+                    @endif
                 </tr>
             </thead>
             <tbody>
@@ -124,9 +130,11 @@
                         @if ($document->type == 1)
                             <tr>
                                 <td><a href="{{ $document->link_document }}">{{ $document->name_document }}</a></td>
-                                <td>
-                                    <button type="submit" class="btn btn-danger">Xóa</button>
-                                </td>
+                                @if ($role == 1)
+                                    <td>
+                                        <button type="submit" class="btn btn-danger">Xóa</button>
+                                    </td>
+                                @endif
                             </tr>
                         @endif
                     </form>
@@ -137,7 +145,9 @@
             <thead>
                 <tr>
                     <th scope="col">Bài viết tham khảo</th>
-                    <th scope="col">Action</th>
+                    @if ($role == 1)
+                        <th scope="col">Action</th>
+                    @endif
                 </tr>
             </thead>
             <tbody>
@@ -148,9 +158,11 @@
                         @if ($document->type == 2)
                             <tr>
                                 <td><a href="{{ $document->link_document }}">{{ $document->name_document }}</a></td>
-                                <td>
-                                    <button type="submit" class="btn btn-danger">Xóa</button>
-                                </td>
+                                @if ($role == 1)
+                                    <td>
+                                        <button type="submit" class="btn btn-danger">Xóa</button>
+                                    </td>
+                                @endif
                             </tr>
                         @endif
                     </form>

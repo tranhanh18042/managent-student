@@ -5,14 +5,16 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UpdateSubjectSection;
 use App\Models\Document;
 use App\Models\SubjectSections;
+use Illuminate\Support\Facades\Auth;
 
 class ShowDetailSection extends Controller
 {
     public function index($id)
     {
+        $role = Auth::user()->role;
         $subjectSection = SubjectSections::find($id);
         $documents = $subjectSection->document()->get();
-        return view('detailSection', compact('subjectSection', 'documents'));
+        return view('detailSection', compact('role','subjectSection', 'documents'));
     }
     public function formEditSubjectSection($id)
     {
