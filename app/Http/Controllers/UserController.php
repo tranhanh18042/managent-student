@@ -18,7 +18,7 @@ class UserController extends Controller
         $users = User::where('role', 0)->get();
         return view('listUsers', compact('users'));
     }
-    
+
     /**
      * @Handle an incoming request Show profile user
      * @return view('profileUser')
@@ -28,7 +28,7 @@ class UserController extends Controller
         $userRes = Auth::user();
         return view('profileUser', compact('userRes'));
     }
-    
+
     /**
      * @Handle an incoming request update profile user
      * @param  \Illuminate\Requests\UserRequest  $request
@@ -60,5 +60,10 @@ class UserController extends Controller
                 ]);
         }
         return redirect()->route('profile');
+    }
+    public function edit()
+    {
+        $user = Auth::user();
+        return view('updateProfile', compact('user'));
     }
 }
